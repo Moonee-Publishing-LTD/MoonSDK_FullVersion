@@ -23,6 +23,7 @@
   Scripting backend: IL2CPP
 #
 ### 2. Downloading the MOON SDK
+The current version of the MOON SDK is version 1.3.5
 
 #
 ### 3. Setting Up Moon SDK
