@@ -1,6 +1,8 @@
-# MooneeSDK_ForDevelopers
+![LOGO](images/logo.png) 
 
-# Manual for the MOON SDK
+# Welcome to the full version of the MOON SDK!
+
+### Manual
   1. System Requirements
   2. Downloading the MOON SDK
   3. Setting Up Moon SDK
