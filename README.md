@@ -1,22 +1,31 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![LOGO](images/logo.png) 
 
-# Welcome to the full version of the MOON SDK!
 
-### Manual
-  1. System Requirements
-  2. Downloading the MOON SDK
-  3. Setting Up Moon SDK
-  4. Initialization
-  5. Displaying Ads
-  6. Analytics
-  7. Firebase Configuration
-  8. Adjust events
-  9. Progression events
-  10. Rate Us View
+# Monetization Guide
+We are going to switch to Moonee SDK (if you had Moonlight SDK, please remove it and switch to this SDK), and we are going to use MAX as a mediator for all monetization partners, while also running their own monetization product.
+## Please Remove all previous SDKs from the game before adding the Moon SDK!
 
-#
-## 1. System Requirements
+<details>
+  <summary>Table of Contents</summary>
+  
+  1. [System Requirements](#system-requirements)
+  2. [Downloading MOON SDK](#Downloading-MOON-SDK)
+  3. [Setting Up Moon SDK](#Setting-Up-Moon-SDK)
+  5. [Initialization](#Initialization)
+  6. [Displaying Ads](#Displaying-Ads)
+  7. [Analytics](#Analytics)
+  8. [Firebase Configuration](#Firebase-Configuration)
+  9. [Adjust Events](#Adjust-events)
+  10. [Progression events](#Progression-Events)
+  11. [In-Game Fonts](#in-game-fonts)
+  12. [Rate Us View](#Rate-Us-View)
+  13. [Ready For Testing](#ready-for-testing)
+</details>
+
+## System Requirements
+<details>
+  <summary></summary>
 - Unity Editor 2021.2 or higher 2021 LTS version
 - Android:
   Minimum SDK: Lollipop 5.0 (API 22)  
@@ -24,12 +33,19 @@
 - iOS: 
   Target minimum iOS Version: 13.0   
   Scripting backend: IL2CPP
-#
-### 2. Downloading the MOON SDK
-The current version of the MOON SDK is version 1.3.5
+</details>
 
-#
-### 3. Setting Up Moon SDK
+
+## Downloading MOON SDK
+<details>
+  <summary></summary>
+  
+</details>
+  
+
+## Setting Up Moon SDK
+<details>
+  <summary></summary>
 
   1. Import MoonSDK.unitypackage into your unity project.
   
@@ -42,13 +58,17 @@ The current version of the MOON SDK is version 1.3.5
   4. Open MoonSDK settings and fill in all app keys for analytics and advertising services which you want to use and press Check and Sync Settings button
     
      ![SyncSettings](images/SyncSettings.png)
-
-#    
-### 4. Initialization
-
+</details>
+ 
+## Initialization
+<details>
+  <summary></summary>
 Moon SDK is initialized automatically from the Moon SDK scene.
-#
-### 5. Displaying Ads
+</details>
+
+## Displaying Ads
+<details>
+  <summary></summary>
 
 MoonSDK does support the following ad formats:
 
@@ -108,18 +128,20 @@ Banner API:
       AdvertisementManager.ShowBanner();
 
       AdvertisementManager.HideBanner();
+</details>
 
 
-#
-### 6. Analytics
-
+## Analytics
+<details>
+  <summary></summary>
 With Moon SDK you can send custom events to various analytics services
 
      MoonSDK.TrackCustomEvent("Event name", MoonSDK.AnalyticsProvider.Firebase);
-    
+</details>
 
-### 7. Firebase Configuration
-
+## Firebase Configuration
+<details>
+  <summary></summary>
 To correctly initialize Firebase, you need to go to the Firebase console and download the configuration files to your project (google-services.json for android and GoogleService-Info.plist for iOS)
 
 ![MoonSDKScene](images/AssetesStreamings.png)
@@ -166,8 +188,11 @@ Note that int_grace_time, cooldown_between_INTs, cooldown_after_RVs are managed 
         {
             AdvertisementManager.ShowInterstitial();
         }
-### 8. Adjust Track iAP Revenue
-
+</details>
+  
+## Adjust Track IAP Revenue
+<details>
+  <summary></summary>
 
 To track iAP revenue for adjust you need to set Adjust app token and iAP revenue event token in Moon SDK settings.
 
@@ -190,9 +215,11 @@ How to get parameters for these methods?  Use PurchaseProcessingResult method
 
 
      MoonSDK.SendUAEvent(MoonSDK.UAEventType.Type1);
+</details>
 
-### 9. Progression Events
-
+## Progression Events
+<details>
+  <summary></summary>
 You can track levels progression events in your game using GameAnalytics
 
 
@@ -210,12 +237,36 @@ Also you need to track level events for Adjust
 **Note**: In this part it is crutial to check:  
      - **A.** Token to Adjust for EACH event  
      - **B.**  No spaces before and after the tokem  
+</details>
 
-### 10. Rate Us View
+## In-Game Fonts
+<details>
+  <summary></summary>  
+In terms of in-game fonts, they must be official fonts from Google Fonts or Liberation Sans from Unity. Follow these steps to ensure compliance with font licensing:
 
+1. Use only fonts from the Google Fonts library or Liberation Sans from Unity.
+2. After selecting the relevant font, ensure you have the license for the game code as a text file.
+3. Rename the license file to the following format: `Fontname_license.txt`.
+4. Place both the font file and its license file in the Fonts directory of your project.
+5. The most common font licenses are OFL (Open Font License) and Apache License.
+6. Copy everything in the StreamingAssets directory to add a new licensed font, which will be automatically added to the build.
+7. Fonts from Google Fonts can be used for both Android and iOS games. You can find them at [Google Fonts](https://fonts.google.com/).
+8. Unity typically has two built-in fonts:
+   * Liberation Sans (free to use)
+   * Arial (note: Arial is not free to use)
+9. Refer to the following guides for embedding custom fonts in games:
+   * Unity - Manual: [Font Assets](https://docs.unity3d.com/Manual/class-Font.html).
+
+By adhering to these guidelines, you ensure that your game uses licensed fonts responsibly and legally.
+
+</details>
+
+## 10. Rate Us View
+<details>
+  <summary></summary>
 You can open rate us screen using code example below
      MoonSDK.OpenRateUsScreen();
-
+</details>
 
 
 
