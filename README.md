@@ -193,8 +193,9 @@ Exsample:
 <details>
   <summary></summary>
 To correctly initialize Firebase, you need to go to the Firebase console and download the configuration files to your project (google-services.json for android and GoogleService-Info.plist for iOS)
-
-![MoonSDKScene](images/AssetesStreamings.png)
+  
+![UnityFirebase](images/AddingFirebaseToUnity.png)
+![AssetesStreaming](images/AssetesStreamings.png)
 
 **Firebase Remote Config** 
 
