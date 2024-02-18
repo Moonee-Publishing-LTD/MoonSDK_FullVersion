@@ -10,35 +10,47 @@ We are going to switch to Moonee SDK (if you had Moonlight SDK, please remove it
   <summary>Table of Contents</summary>
   
   1. [System Requirements](#system-requirements)
-  2. [Downloading MOON SDK](#Downloading-MOON-SDK)
-  3. [Setting Up Moon SDK](#Setting-Up-Moon-SDK)
-  5. [Initialization](#Initialization)
-  6. [Displaying Ads](#Displaying-Ads)
-  7. [Analytics](#Analytics)
-  8. [Firebase Configuration](#Firebase-Configuration)
-  9. [Adjust Events](#Adjust-events)
-  10. [Progression events](#Progression-Events)
+  2. [Downloading MOON SDK](#downloading-moon-sdk)
+  3. [Setting Up Moon SDK](#setting-up-moon-sdk)
+  4. [Initialization](#initialization)
+  5. [Displaying Ads](#displaying-ads)  
+      A. [Rewarded Video Ads](#rewarded-video-ads-api)  
+      B. [Interstitial Ads](#interstitial-ads-api)  
+      C. [Banner Ads](#banner-ads-api)  
+  7. [Analytics](#analytics)
+  8. [Firebase Configuration](#firebase-configuration)
+  9. [Adjust Events](#adjust-events)
+  10. [Progression events](#progression-events)
   11. [In-Game Fonts](#in-game-fonts)
-  12. [Rate Us View](#Rate-Us-View)
+  12. [Rate Us View](#rate-us-view)
   13. [Ready For Testing](#ready-for-testing)
 </details>
 
 ## System Requirements
 <details>
   <summary></summary>
-- Unity Editor 2021.2 or higher 2021 LTS version
-- Android:
-  Minimum SDK: Lollipop 5.0 (API 22)  
-  Scripting backend: IL2CPP
-- iOS: 
-  Target minimum iOS Version: 13.0   
-  Scripting backend: IL2CPP
+  
+  - Unity Editor 2021.2 or higher (2021 LTS version)
+  - Android:
+    - Minimum SDK: Lollipop 5.0 (API 22)
+    - Scripting backend: IL2CPP
+  - iOS:
+    - Target minimum iOS Version: 13.0
+    - Scripting backend: IL2CPP
+  - Stores:
+    - In order for us to have the optimal monetization, we will need you to add our web link in the stores:[https://moonee.io](#https://moonee.io)
+    - On Google play it’s under Store Settings -> Website
+    - On App Store it’s under Marketing URL in an App Version
+
+      
 </details>
 
 
 ## Downloading MOON SDK
 <details>
   <summary></summary>
+
+  The current version of the MOON SDK is [version 1.3.5](https://drive.google.com/file/d/1jYZ65BiPbhzySEBcFSuwxP9EGQJkjsfM/view)     
   
 </details>
   
@@ -72,16 +84,26 @@ Moon SDK is initialized automatically from the Moon SDK scene.
 
 MoonSDK does support the following ad formats:
 
-Rewarded video ads
-Interstitials
-Banner
+1. Rewarded video ads
+2. Interstitials
+3. Banner
 
 To use the advertisement manager add the following namespace: 
-      using Moonee.MoonSDK.Internal.Advertisement;
+      using `Moonee.MoonSDK.Internal.Advertisement;`
 
 
-Rewarded video ads API:
-
+  ### Rewarded video ads API:
+<details>
+  <summary>Expand</summary>
+  
+       void AdvertisementManager.ShowRewardedAd
+       (
+         [Action OnStartAdEvent = null],
+         [Action OnFinishAdEvent = null],
+         [Action OnFailAdEvent = null],
+         [Action OnFinishRewardedVideowWithSuccessEvent = null]
+       )
+       
        AdvertisementManager.ShowRewardedAd(
         () => 
         {
@@ -99,14 +121,25 @@ Rewarded video ads API:
         {
             //Add Reward logic
         });
-
-
+      
+      Bool AdvertisementManager.IsRewardedAdReady()
       AdvertisementManager.IsRewardedAdReady();
+</details>
 
-Interstitial ads API:
+  ### Interstitial ads API:
+<details>
+  <summary>Expand</summary>
 
+      float AdvertisementManager.InterstitialTimer {get; private set;}
       double timeLeftForNextAd = AdvertisementManager.InterstitialTimer;
 
+      void AdvertisementManager.ShowInterstitial
+       (
+         [Action OnStartAdEvent = null],
+         [Action OnFinishAdEvent = null],
+         [Action OnFailAdEvent = null]
+       )
+       
        AdvertisementManager.ShowInterstitial(
         () =>
         {
@@ -121,15 +154,22 @@ Interstitial ads API:
             //Ad fail logic
         });
 
-       AdvertisementManager.IsInterstitialdAdReady();
+        Bool AdvertisementManager.IsInterstitialdAdReady()
+        AdvertisementManager.IsInterstitialdAdReady();
+</details>
 
-Banner API:
+  ### Banner Ads API:
+<details>
+  <summary>Expand</summary>
 
+      void AdvertisementManager.ShowBanner()
       AdvertisementManager.ShowBanner();
 
       AdvertisementManager.HideBanner();
+      void AdvertisementManager.HideBanner();
 </details>
 
+</details>
 
 ## Analytics
 <details>
@@ -220,23 +260,20 @@ How to get parameters for these methods?  Use PurchaseProcessingResult method
 ## Progression Events
 <details>
   <summary></summary>
-You can track levels progression events in your game using GameAnalytics
+  
+**Levels progression events using Adjust and Moonee's Developer's Dahboard:**  
 
+      MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
+      MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
+      
+**Levels progression events using GameAnalytics:**  
 
-
-  MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents.Start, 1);
-
-Also you need to track level events for Adjust
-
-
-     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, "001", LevelResult.win, false);
-
-
-    MoonSDK.SendLevelDataStartEvent("001");
+      void MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents eventType, int levelIndex);
+      MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents.Start, 1);
 
 **Note**: In this part it is crutial to check:  
      - **A.** Token to Adjust for EACH event  
-     - **B.**  No spaces before and after the tokem  
+     - **B.**  No spaces before and after the token 
 </details>
 
 ## In-Game Fonts
