@@ -167,6 +167,7 @@ To use the advertisement manager add the following namespace:
 
       AdvertisementManager.HideBanner();
       void AdvertisementManager.HideBanner();
+      
 </details>
 
 </details>
@@ -175,8 +176,17 @@ To use the advertisement manager add the following namespace:
 <details>
   <summary></summary>
 With Moon SDK you can send custom events to various analytics services
-
-     MoonSDK.TrackCustomEvent("Event name", MoonSDK.AnalyticsProvider.Firebase);
+  
+      Void  MoonSDK.TrackCustomEvent("Event name", [Dictionary <string, object> eventProperties = null],
+      [string type = null],
+      [List < MoonSDK.AnalyticsProvider> analyticsProviders = null])
+      
+Call this method to track any custom event you want.  
+eventName = the name of the event to track.  
+Exsample:  
+      
+      MoonSDK.TrackCustomEvent("Event name", MoonSDK.AnalyticsProvider.Firebase);
+  
 </details>
 
 ## Firebase Configuration
