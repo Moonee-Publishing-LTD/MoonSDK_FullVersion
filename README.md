@@ -3,8 +3,14 @@
 
 
 # Monetization Guide
-We are going to switch to Moonee SDK (if you had Moonlight SDK, please remove it and switch to this SDK), and we are going to use MAX as a mediator for all monetization partners, while also running their own monetization product.
-## Please Remove all previous SDKs from the game before adding the Moon SDK!
+Welcome, developers, to the full version of the Moon SDK! 🌕
+
+Exciting news awaits as we transition to the Moonee SDK. If you were using the Moonlight SDK previously, kindly remove it and make the switch to this upgraded version.
+
+In this journey, we're implementing MAX as the central mediator for all monetization partners, streamlining the process while also empowering you to leverage your own monetization products.
+
+Let's embark on this enhanced development experience together! 🚀
+
 
 <details>
   <summary>Table of Contents</summary>
@@ -16,14 +22,17 @@ We are going to switch to Moonee SDK (if you had Moonlight SDK, please remove it
   5. [Displaying Ads](#displaying-ads)  
       A. [Rewarded Video Ads](#rewarded-video-ads-api)  
       B. [Interstitial Ads](#interstitial-ads-api)  
-      C. [Banner Ads](#banner-ads-api)  
-  7. [Analytics](#analytics)
-  8. [Firebase Configuration](#firebase-configuration)
-  9. [Adjust Events](#adjust-events)
-  10. [Progression events](#progression-events)
-  11. [In-Game Fonts](#in-game-fonts)
-  12. [Rate Us View](#rate-us-view)
-  13. [Ready For Testing](#ready-for-testing)
+      C. [Banner Ads](#banner-ads-api)
+  6. [Events](#events)  
+      A. [Analytic Events](#analytic-events)  
+      B. [Adjust UA Events](adjust-ua-events)  
+      C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
+      D. [Progression events](#progression-events)  
+  8.  [Firebase Configuration](#firebase-configuration)
+  9.  [CMP - GDPR Consent](#cmp-gdpr-consent)
+  10. [In-Game Fonts](#in-game-fonts)
+  11. [Rate Us View](#rate-us-view)
+  12. [Ready For Testing](#ready-for-testing)
 </details>
 
 ## System Requirements
@@ -84,9 +93,9 @@ Moon SDK is initialized automatically from the Moon SDK scene.
 
 MoonSDK does support the following ad formats:
 
-1. Rewarded video ads
-2. Interstitials
-3. Banner
+      A. [Rewarded Video Ads](#rewarded-video-ads-api)  
+      B. [Interstitial Ads](#interstitial-ads-api)  
+      C. [Banner Ads](#banner-ads-api)
 
 To use the advertisement manager add the following namespace: 
       using `Moonee.MoonSDK.Internal.Advertisement;`
@@ -172,7 +181,15 @@ To use the advertisement manager add the following namespace:
 
 </details>
 
-## Analytics
+## Events
+<details>
+  <summary></summary>
+      A. [Analytic Events](#analytic-events)
+      B. [Adjust UA Events](adjust-ua-events)
+      C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)
+      D. [Progression events](#progression-events)
+  
+### Analytic Events
 <details>
   <summary></summary>
 With Moon SDK you can send custom events to various analytics services
@@ -187,6 +204,61 @@ Exsample:
       
       MoonSDK.TrackCustomEvent("Event name", MoonSDK.AnalyticsProvider.Firebase);
   
+</details>
+
+
+### Adjust UA Events
+<details>
+  <summary></summary>
+  
+     void MoonSDK.sendUAEvent(UAEventType.eventType);
+     MoonSDK.SendUAEvent(MoonSDK.UAEventType.Type1);
+     
+</details>
+
+### In-app purchase (IAP) Events:
+<details>
+  <summary></summary>
+  
+To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you've configured the Adjust app token and the IAP revenue event token within the Moon SDK settings.
+Go to receipt Validation Obfuscator , paste the google public key of your app and press “Obfuscate Google Play License Key”.
+
+After each successful purchase you need to send event to adjust:
+
+1. Price in USD use this method
+   
+     void MoonSDK.TrackAdjustRevenueEvent(PurchaseEventArgs e, double priceInUSD)
+
+To send price in local currency use this method
+
+    void MoonSDK.TrackAdjustRevenueEvent(PurchaseEventArgs e, double product)
+
+    MoonSDK.TrackAdjustRevenueEvent(20, transactionID);
+
+How to get parameters for these methods?  
+
+     PurchaseProcessingResult method
+
+</details>
+
+### Progression Events
+<details>
+  <summary></summary>
+  
+**Levels progression events using Adjust and Moonee's Developer's Dahboard:**  
+
+      MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
+      MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
+      
+**Levels progression events using GameAnalytics:**  
+
+      void MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents eventType, int levelIndex);
+      MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents.Start, 1);
+
+**Note**: In this part it is crutial to check:  
+     - **A.** Token to Adjust for EACH event  
+     - **B.**  No spaces before and after the token 
+</details>
 </details>
 
 ## Firebase Configuration
@@ -211,13 +283,13 @@ False:  player gets ads after success levels only.
 6. INT_in_stage: Interstitials In Stage,
 True: player gets ads during stages
 False: player gets ads after stages only
-Default values:
+**Default values:**
 int_grace_time: 30 sec
 Int_grace_level: 1 level
 cooldown_between_INTs: 20 sec
- cooldown_after_RVs: 20 sec
+cooldown_after_RVs: 20 sec
 Show_int_if_fail: False
- INT_in_stage: False
+INT_in_stage: False
 
 Note that int_grace_time, cooldown_between_INTs, cooldown_after_RVs are managed automatically by Moon SDK and you don’t need to do anything with that, but the rest values you need to check before showing ads.
 
@@ -240,53 +312,19 @@ Note that int_grace_time, cooldown_between_INTs, cooldown_after_RVs are managed 
             AdvertisementManager.ShowInterstitial();
         }
 </details>
-  
-## Adjust Track IAP Revenue
+
+## CMP - GDPR Consent
+We utilize a CMP (Consent Management Platform) solution to obtain consent from users.   
+Effective CMP implementations can potentially boost the value of users engaging with the game, potentially adding up to 50% of the ad's worth.
+
+To use CMP in your project you need to fill in the Adjust Consent Token
+
+Below you will find a code example how to pop up the consent window from your game, remember to mute sounds and stop any ad timers. Create a consent button in settings screen in your game.
+
 <details>
-  <summary></summary>
+  <summary></summary>  
 
-To track iAP revenue for adjust you need to set Adjust app token and iAP revenue event token in Moon SDK settings.
-
-Go to receipt Validation Obfuscator , paste the google public key of your app and press “Obfuscate Google Play License Key”.
-
-After each successful purchase you need to send event to adjust:
-
-
-
-
-
-
-To send price in USD use this method
-
-To send price in local currency use this method
-
-    MoonSDK.TrackAdjustRevenueEvent(20, transactionID);
-
-How to get parameters for these methods?  Use PurchaseProcessingResult method
-
-
-     MoonSDK.SendUAEvent(MoonSDK.UAEventType.Type1);
-</details>
-
-## Progression Events
-<details>
-  <summary></summary>
-  
-**Levels progression events using Adjust and Moonee's Developer's Dahboard:**  
-
-      MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
-      MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
-      
-**Levels progression events using GameAnalytics:**  
-
-      void MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents eventType, int levelIndex);
-      MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents.Start, 1);
-
-**Note**: In this part it is crutial to check:  
-     - **A.** Token to Adjust for EACH event  
-     - **B.**  No spaces before and after the token 
-</details>
-
+</details>  
 ## In-Game Fonts
 <details>
   <summary></summary>  
