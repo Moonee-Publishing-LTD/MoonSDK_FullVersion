@@ -319,10 +319,25 @@ Note that int_grace_time, cooldown_between_INTs, cooldown_after_RVs are managed 
 We utilize a CMP (Consent Management Platform) solution to obtain consent from users.   
 Effective CMP implementations can potentially boost the value of users engaging with the game, potentially adding up to 50% of the ad's worth.
   
-To use CMP in your project you need to fill in the Adjust Consent Token
-![consentToken](images/consentToken)
-Below you will find a code example how to pop up the consent window from your game, remember to mute sounds and stop any ad timers. Create a consent button in settings screen in your game.
+To use CMP in your project you need to fill in the Adjust Consent Token:  
+![consentToken](images/consentToken.png)    
+  
+Below you will find a code example how to pop up the consent window from your game,you will need to mute sounds and stop any ad timers.   
+Create a consent button in settings screen in your game.
 
+      private void ConsentsButtonPressed()
+    {
+        CMP.OpenSettingsScreen();
+        CMP.eventHandler += OnConsentsChangesEventListener; // Don't forget to unsubscribe, you can use OnDestroy method for example
+        // AdvertisementManager.PauseInterstitialTimer();
+        // AudioController.PauseMusic(true);
+    }
+    private void OnConsentsChangesEventListener(int id, TCData TCData, bool isSuccess)
+    {
+        //AdvertisementManager.ResumeInterstitialTimer();
+        //AudioController.PauseMusic(false);
+    }
+    
 </details>  
 
 ## In-Game Fonts
