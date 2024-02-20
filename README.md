@@ -456,7 +456,7 @@ You can download + open the app and check on FB Developer main dashboard if youâ
 
 Get check for the following:
   - We get the following events:
-    - levelDataStrat
+    - levelDataStart
     - levelDataComplete events from the app
   - We get consent event
 </details>
