@@ -29,7 +29,7 @@ Let's embark on this enhanced development experience together! 🚀
       C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
       D. [Progression events](#progression-events)  
   8.  [Firebase Configuration](#firebase-configuration)
-  9.  [CMP - GDPR Consent](#cmp-gdpr-consent)
+  9.  [CMP - GDPR Consent](#cmp---gdpr-consent)
   10. [In-Game Fonts](#in-game-fonts)
   11. [Rate Us View](#rate-us-view)
   12. [Ready For Testing](#ready-for-testing)
@@ -93,9 +93,9 @@ Moon SDK is initialized automatically from the Moon SDK scene.
 
 MoonSDK does support the following ad formats:
 
-      A. [Rewarded Video Ads](#rewarded-video-ads-api)  
-      B. [Interstitial Ads](#interstitial-ads-api)  
-      C. [Banner Ads](#banner-ads-api)
+A. [Rewarded Video Ads](#rewarded-video-ads-api)  
+B. [Interstitial Ads](#interstitial-ads-api)  
+C. [Banner Ads](#banner-ads-api)
 
 To use the advertisement manager add the following namespace: 
       using `Moonee.MoonSDK.Internal.Advertisement;`
@@ -184,17 +184,18 @@ To use the advertisement manager add the following namespace:
 ## Events
 <details>
   <summary></summary>
-      A. [Analytic Events](#analytic-events)
-      B. [Adjust UA Events](adjust-ua-events)
-      C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)
-      D. [Progression events](#progression-events)
+  
+A. [Analytic Events](#analytic-events)  
+B. [Adjust UA Events](adjust-ua-events)  
+C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
+D. [Progression events](#progression-events)  
   
 ### Analytic Events
 <details>
   <summary></summary>
 With Moon SDK you can send custom events to various analytics services
   
-      Void  MoonSDK.TrackCustomEvent("Event name", [Dictionary <string, object> eventProperties = null],
+       Void  MoonSDK.TrackCustomEvent("Event name", [Dictionary <string, object> eventProperties = null],
       [string type = null],
       [List < MoonSDK.AnalyticsProvider> analyticsProviders = null])
       
@@ -225,9 +226,9 @@ Go to receipt Validation Obfuscator , paste the google public key of your app an
 
 After each successful purchase you need to send event to adjust:
 
-1. Price in USD use this method
+Price in USD use this method
    
-     void MoonSDK.TrackAdjustRevenueEvent(PurchaseEventArgs e, double priceInUSD)
+    void MoonSDK.TrackAdjustRevenueEvent(PurchaseEventArgs e, double priceInUSD)
 
 To send price in local currency use this method
 
@@ -362,14 +363,17 @@ By adhering to these guidelines, you ensure that your game uses licensed fonts r
 
 </details>
 
-## 10. Rate Us View
+## Rate Us View
 <details>
   <summary></summary>
+  
 You can open rate us screen using code example below
+
      MoonSDK.OpenRateUsScreen();
+     
 </details>
 
-
+## 
 
   
 
