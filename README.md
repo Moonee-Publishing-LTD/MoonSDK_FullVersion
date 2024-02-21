@@ -63,7 +63,7 @@ Let's embark on this enhanced development experience together! 🚀
 <details>
   <summary></summary>
 
-  The current version of the MOON SDK is [version 1.3.5](https://drive.google.com/file/d/1jYZ65BiPbhzySEBcFSuwxP9EGQJkjsfM/view)     
+  The current version of the MOON SDK is version 1.3.5    (Slack bot is sending the link) 
   
 </details>
   
