@@ -341,7 +341,14 @@ Create a consent button in settings screen in your game.
         //AdvertisementManager.ResumeInterstitialTimer();
         //AudioController.PauseMusic(false);
     }
-    
+
+Check if the user is in the GDPR country
+
+    if(!CheckGDPRCountry.CheckCountryForGDPR())
+        {
+    //Disable cmp pop-up
+        } 
+        
 </details>  
 
 ## In-Game Fonts
