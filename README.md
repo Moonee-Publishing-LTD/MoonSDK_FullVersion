@@ -348,6 +348,36 @@ Check if the user is in the GDPR country
         {
     //Disable cmp pop-up
         } 
+
+Add this on the CMP.cs script:
+
+     private void Start()
+        {
+            privacySettingsView = Resources.Load<PrivacySettingsView>("PrivacySettingsView");
+            GDPRView = Resources.Load<GDPRView>("GDPRView") as GDPRView;
+            staticSDKStarter = SDKStarter;
+
+            if (TCData.IsAlreadyAsked)
+            {
+                SDKStarter.enabled = true;
+      //added this line
+                regionIdentifier.SetCurrentRegion(() => { });
+            }
+            else
+            {
+                regionIdentifier.SetCurrentRegion(() => 
+                {
+                    if(CheckGDPRCountry.CheckCountryForGDPR())
+                    {
+                        Instantiate(GDPRView);
+                    }
+                    else
+                    {
+                        SDKStarter.enabled = true;
+                    }
+                });
+            }
+        }
         
 </details>  
 
