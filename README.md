@@ -11,6 +11,18 @@ In this journey, we're implementing MAX as the central mediator for all monetiza
 Let's embark on this enhanced development experience together! 🚀
 
 
+
+#
+#### Current Version: 1.3.5 (Released: 15/02/2024)
+
+In this version, we've made the following updates:
+
+- Updated Adapters: We've updated all adapters to ensure seamless integration with our monetization partners, enhancing performance and reliability.
+
+- CMP for EU Consent: In compliance with EU regulations, we've implemented a Consent Management Platform (CMP) by Moonee to handle user consent for data processing. This addition ensures adherence to privacy standards while maintaining a user-centric approach.
+
+
+#
 <details>
   <summary>Table of Contents</summary>
   
