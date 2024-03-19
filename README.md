@@ -281,7 +281,19 @@ How to get parameters for these methods?
 ## Firebase Configuration
 <details>
   <summary></summary>
-To correctly initialize Firebase, you need to go to the Firebase console and download the configuration files to your project (google-services.json for android and GoogleService-Info.plist for iOS)
+
+**We utilize Firebase for two primary purposes:**
+
+1. User Acquisition: To facilitate proper integration within Google platforms, event data needs to be stored in Firebase.
+2. A/B Testing via Remote Config: This powerful tool enables remote modification of parameters.
+
+**Workflow:**
+
+1. A designated team member, typically the Product Manager, will initiate a Firebase project for your game (do not create one yourself, as it may lead to improper UA usage).
+2. You will receive configuration files (google-services.json for Android and GoogleService-Info.plist for iOS).
+3. Integrate these files into your Unity project following the instructions provided below.
+
+
   
 ![UnityFirebase](images/AddingFirebaseToUnity.png)
 ![AssetesStreaming](images/AssetesStreamings.png)
@@ -300,6 +312,7 @@ False:  player gets ads after success levels only.
 6. INT_in_stage: Interstitials In Stage,
 True: player gets ads during stages
 False: player gets ads after stages only
+
 **Default values:**
 int_grace_time: 30 sec
 Int_grace_level: 1 level
