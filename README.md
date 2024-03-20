@@ -240,11 +240,12 @@ To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you'v
 Go to receipt Validation Obfuscator , paste the google public key of your app and press “Obfuscate Google Play License Key”.
 Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios
 We have the following arguments in every event:
-  1. OrderID (by ios or Google)
-  2. Price_without_comission
-  3. Price_original (what the user is paying)
+  1. OrderID (e.g: Google:"GPA.0000-0000-00000-00000", iOS: 000000001234567)
+  2. Price_without_comission (In the user's currency, e.g: 4.9118)
+  3. Price_original (What the user is paying, in the user's currency)
   4. ProductID (e.g monthly_subscription)
   5. Token (by the store)  
+
 After each successful purchase you need to send event to adjust:
 
 Price in USD use this method
