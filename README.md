@@ -244,23 +244,13 @@ We have the following arguments in every event:
   2. Price_without_comission (In the user's currency, e.g: 4.9118)
   3. Price_original (What the user is paying, in the user's currency)
   4. ProductID (e.g monthly_subscription)
-  5. Token (by the store)  
+  5. Token (by the store)
+  6. Type (one - time purchase or subscription) 
 
 After each successful purchase you need to send event to adjust:
 
-Price in USD use this method
-   
-    void MoonSDK.TrackAdjustRevenueEvent(PurchaseEventArgs e, double priceInUSD)
-
-To send price in local currency use this method
-
-    void MoonSDK.TrackAdjustRevenueEvent(PurchaseEventArgs e, double product)
-
-    MoonSDK.TrackAdjustRevenueEvent(20, transactionID);
-
-How to get parameters for these methods?  
-
-     PurchaseProcessingResult method
+      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType)
+      await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product);
 
 </details>
 
@@ -347,6 +337,7 @@ Note that int_grace_time, cooldown_between_INTs, cooldown_after_RVs are managed 
         {
             AdvertisementManager.ShowInterstitial();
         }
+
 </details>
 
 ## CMP - GDPR Consent
@@ -381,35 +372,6 @@ Check if the user is in the GDPR country
     //Disable cmp pop-up
         } 
 
-Add this on the CMP.cs script:
-
-     private void Start()
-        {
-            privacySettingsView = Resources.Load<PrivacySettingsView>("PrivacySettingsView");
-            GDPRView = Resources.Load<GDPRView>("GDPRView") as GDPRView;
-            staticSDKStarter = SDKStarter;
-
-            if (TCData.IsAlreadyAsked)
-            {
-                SDKStarter.enabled = true;
-      //added this line
-                regionIdentifier.SetCurrentRegion(() => { });
-            }
-            else
-            {
-                regionIdentifier.SetCurrentRegion(() => 
-                {
-                    if(CheckGDPRCountry.CheckCountryForGDPR())
-                    {
-                        Instantiate(GDPRView);
-                    }
-                    else
-                    {
-                        SDKStarter.enabled = true;
-                    }
-                });
-            }
-        }
         
 </details>  
 
