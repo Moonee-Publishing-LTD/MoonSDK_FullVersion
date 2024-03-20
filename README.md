@@ -239,7 +239,12 @@ Exsample:
 To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you've configured the Adjust app token and the IAP revenue event token within the Moon SDK settings.
 Go to receipt Validation Obfuscator , paste the google public key of your app and press “Obfuscate Google Play License Key”.
 Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios
-
+We have the following arguments in every event:
+  1. OrderID (by ios or Google)
+  2. Price_without_comission
+  3. Price_original (what the user is paying)
+  4. ProductID (e.g monthly_subscription)
+  5. Token (by the store)
 After each successful purchase you need to send event to adjust:
 
 Price in USD use this method
