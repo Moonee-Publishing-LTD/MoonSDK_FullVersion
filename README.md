@@ -239,6 +239,7 @@ Exsample:
 To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you've configured the Adjust app token and the IAP revenue event token within the Moon SDK settings.
 Go to receipt Validation Obfuscator , paste the google public key of your app and press “Obfuscate Google Play License Key”.
 Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios
+
 We have the following arguments in every event:
   1. OrderID (e.g: Google:"GPA.0000-0000-00000-00000", iOS: 000000001234567)
   2. Price_without_comission (In the user's currency, e.g: 4.9118)
@@ -258,15 +259,36 @@ After each successful purchase you need to send event to adjust:
 <details>
   <summary></summary>
   
-**Levels progression events using Adjust and Moonee's Developer's Dahboard:**  
+**Levels progression events using Adjust:**  
+We utilize two key events related to game level progression: LevelDataStartEvent and LevelDataCompleteEvent.
 
-      MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
-      MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
+LevelDataStartEvent is sent at the begginig of the level.
+
+     MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
+
+LevelDataCompleteEvent  is sent at the end of the level:
+1. LevelStatus - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
+2. LevelResult - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
+3. isContinueLevel - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
+     option. If the game doesn't have these features, it should be set to false by default.
+4. Data related to time spent in the game's store
+
+Use it as described below:
+
+     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
+
+For the in game store data, use the following (the rest is aoutomatic):
+
+      MoonSDK.OpenInGameStore(); // Execute when user opens the store
+      MoonSDK.CloseInGameStore(); // Execute when user closes the store
+
       
 **Levels progression events using GameAnalytics:**  
 
+
       void MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents eventType, int levelIndex);
       MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents.Start, 1);
+
 
 **Note**: In this part it is crutial to check:  
      - **A.** Token to Adjust for EACH event  
