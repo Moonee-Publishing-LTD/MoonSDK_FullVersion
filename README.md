@@ -244,7 +244,7 @@ We have the following arguments in every event:
   2. Price_without_comission
   3. Price_original (what the user is paying)
   4. ProductID (e.g monthly_subscription)
-  5. Token (by the store)
+  5. Token (by the store)  
 After each successful purchase you need to send event to adjust:
 
 Price in USD use this method
