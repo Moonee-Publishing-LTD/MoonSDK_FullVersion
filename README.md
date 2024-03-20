@@ -262,14 +262,14 @@ After each successful purchase you need to send event to adjust:
 **Levels progression events using Adjust:**  
 We utilize two key events related to game level progression: LevelDataStartEvent and LevelDataCompleteEvent.
 
-LevelDataStartEvent is sent at the begginig of the level.
+`LevelDataStartEvent` is sent at the begginig of the level.
 
      MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
 
-LevelDataCompleteEvent  is sent at the end of the level:
-1. LevelStatus - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
-2. LevelResult - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
-3. isContinueLevel - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
+`LevelDataCompleteEvent`  is sent at the end of the level:
+1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
+2. `LevelResult` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
+3. `isContinueLevel` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
      option. If the game doesn't have these features, it should be set to false by default.
 4. Data related to time spent in the game's store
 
@@ -320,26 +320,26 @@ For the in game store data, use the following (the rest is aoutomatic):
 
 Moon SDK by default uses some default remote config values:
 
-1. int_grace_time: Interstitials Grace Time - time (in seconds) from app first use until first INT.
-2. Int_grace_level: Interstitials Grace Level-  after which level first INT will be shown.
-3. cooldown_between_INTs: Cooldown Between Interstitials -  timer (in seconds) for spaces between INTs.
-4. cooldown_after_RVs: Cooldown After Rewarded Videos- time (in seconds) for INT AFTER watching a Rewarded video.( Replace cooldown_between_int ).
-5. Show_int_if_fail: Show Interstitial If Fail 	
-True: player gets ads after each level, regardless of success status,
-False:  player gets ads after success levels only.
-6. INT_in_stage: Interstitials In Stage,
-True: player gets ads during stages
-False: player gets ads after stages only
+1. `int_grace_time`: Interstitials Grace Time - time (in seconds) from app first use until first INT.
+2. `Int_grace_level: Interstitials Grace Level-  after which level first INT will be shown.
+3. `cooldown_between_INTs`: Cooldown Between Interstitials -  timer (in seconds) for spaces between INTs.
+4. `cooldown_after_RVs`: Cooldown After Rewarded Videos- time (in seconds) for INT AFTER watching a Rewarded video.( Replace cooldown_between_int ).
+5. `Show_int_if_fail`: Show Interstitial If Fail 	
+`True`: player gets ads after each level, regardless of success status,
+`False`:  player gets ads after success levels only.
+6. `INT_in_stage`: Interstitials In Stage,
+`True`: player gets ads during stages
+`False`: player gets ads after stages only
 
 **Default values:**
-int_grace_time: 30 sec
-Int_grace_level: 1 level
-cooldown_between_INTs: 20 sec
-cooldown_after_RVs: 20 sec
-Show_int_if_fail: False
-INT_in_stage: False
+`int_grace_time`: 30 sec
+`Int_grace_level`: 1 level
+`cooldown_between_INTs`: 20 sec
+`cooldown_after_RVs`: 20 sec
+`Show_int_if_fail`: False
+`INT_in_stage`: False
 
-Note that int_grace_time, cooldown_between_INTs, cooldown_after_RVs are managed automatically by Moon SDK and you don’t need to do anything with that, but the rest values you need to check before showing ads.
+Note that `int_grace_time`, `cooldown_between_INTs`, `cooldown_after_RVs` are managed automatically by Moon SDK and you don’t need to do anything with that, but the rest values you need to check before showing ads.
 
 
        if(currentLevel > RemoteConfigValues.int_grace_level)
@@ -489,12 +489,12 @@ You can download + open the app and check on FB Developer main dashboard if you�
 
 1. Create a Game analytics account and asset using this [link](https://tool.gameanalytics.com/login?redirect=%252F).
 2. If your game is level-based, make sure to have the events:
-   - Start
-   - Complete
-   - Fail
+   - `Start`
+   - `Complete`
+   - `Fail`
 3. Make sure to have the level events naming in the format:
-   - “Level0001”
-   - “Level0002”
+   - `Level0001`
+   - `Level0002`
    (Make sure to start from level 0001 and not from 0000)
 4. Grant us Admin access to the app on Game Analytics: 
    - Settings -> Users -> Invite users -> for this user erez@moonee.io
@@ -508,9 +508,9 @@ You can download + open the app and check on FB Developer main dashboard if you�
 
 Get check for the following:
   - We get the following events:
-    - levelDataStart
-    - levelDataComplete events from the app
-  - We get consent event
+    - `levelDataStart`
+    - `levelDataComplete` events from the app
+    - We get `consent` event
 </details>
 
 # Good Luck! 
