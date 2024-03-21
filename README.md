@@ -251,6 +251,10 @@ After each successful purchase you need to send event to adjust:
       public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType)
       await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product);
 
+Example:
+
+      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args);
+
 </details>
 
 ### Progression Events
