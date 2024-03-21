@@ -253,7 +253,7 @@ After each successful purchase you need to send event to adjust:
 
 Example:
 
-      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args);
+      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription);
 
 </details>
 
