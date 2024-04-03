@@ -126,8 +126,8 @@ To use the advertisement manager add the following namespace:
          [Action OnFinishRewardedVideowWithSuccessEvent = null]
        )
        
-       AdvertisementManager.ShowRewardedAd(
-        () => 
+        AdvertisementManager.ShowRewardedAd(
+        () =>
         {
             //Ad start logic
         },
@@ -137,12 +137,13 @@ To use the advertisement manager add the following namespace:
         },
         () =>
         {
-            //Ad fail logic
+            //Add Error logic
         },
         () =>
         {
             //Add Reward logic
-        });
+        }, 
+        "rewardedVideoName");
       
       Bool AdvertisementManager.IsRewardedAdReady()
       AdvertisementManager.IsRewardedAdReady();
