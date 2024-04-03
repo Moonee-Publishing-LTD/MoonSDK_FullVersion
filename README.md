@@ -142,7 +142,8 @@ To use the advertisement manager add the following namespace:
         () =>
         {
             //Add Reward logic
-        });
+        }, 
+        "rewardedVideoName");
       
       Bool AdvertisementManager.IsRewardedAdReady()
       AdvertisementManager.IsRewardedAdReady();
