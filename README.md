@@ -367,8 +367,9 @@ To use CMP in your project you need to fill in the Adjust Consent Token:
 ![consentToken](images/consentToken.png)    
   
 Below you will find a code example how to pop up the consent window from your game,you will need to mute sounds and stop any ad timers.   
-Create a consent button in settings screen in your game.
-![consentToken](images/consentToken.png)  
+Create a consent button in settings screen in your game.  
+![consentSetting](images/consent_setting.png)    
+
 
       private void ConsentsButtonPressed()
     {
