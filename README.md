@@ -369,7 +369,7 @@ To use CMP in your project you need to fill in the Adjust Consent Token:
 Consent precedes any other aspect of the SDK and the tutorial. We are dedicated to compliance with the highest regulatory standards in Europe, as outlined by the GDPR enforced by the IAB. Therefore, we are unable to implement the best practice of obtaining consent after the tutorial.
 The CMP popup appears as follows: 
 <details>
- <summary>Expand</summary>
+ <summary>ConsentPopUp</summary>
   
 ![welcome](images/welcome.png) 
 
