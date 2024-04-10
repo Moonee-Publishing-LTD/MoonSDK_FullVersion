@@ -374,8 +374,10 @@ The CMP popup appears as follows:
 ![welcome](images/welcome.png) 
 
 </details>
+
 Below you will find a code example how to pop up the consent window from your game,you will need to mute sounds and stop any ad timers.   
 Create a consent button in settings screen in your game.  
+
 ![consentSetting](images/consent_setting.png)    
 
 
