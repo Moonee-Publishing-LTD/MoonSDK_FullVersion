@@ -367,9 +367,13 @@ To use CMP in your project you need to fill in the Adjust Consent Token:
 ![consentToken](images/consentToken.png)    
 
 Consent precedes any other aspect of the SDK and the tutorial. We are dedicated to compliance with the highest regulatory standards in Europe, as outlined by the GDPR enforced by the IAB. Therefore, we are unable to implement the best practice of obtaining consent after the tutorial.
-The CMP popup appears as follows:  
+The CMP popup appears as follows: 
+<details>
+ <summary>Expand</summary>
+  
 ![welcome](images/welcome.png) 
 
+</details>
 Below you will find a code example how to pop up the consent window from your game,you will need to mute sounds and stop any ad timers.   
 Create a consent button in settings screen in your game.  
 ![consentSetting](images/consent_setting.png)    
