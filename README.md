@@ -117,6 +117,8 @@ To use the advertisement manager add the following namespace:
   ### Rewarded video ads API:
 <details>
   <summary>Expand</summary>
+
+  Note a change: Add Rewarded video name 
   
        void AdvertisementManager.ShowRewardedAd
        (
@@ -143,7 +145,7 @@ To use the advertisement manager add the following namespace:
         {
             //Add Reward logic
         }, 
-        "rewardedVideoName");
+        "rewardedVideoName"); // Add Rewarded video name
       
       Bool AdvertisementManager.IsRewardedAdReady()
       AdvertisementManager.IsRewardedAdReady();
