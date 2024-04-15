@@ -19,6 +19,7 @@ In this version, we've made the following updates:
 
 - New parameters for in app events
 - More Playtime data
+- Add Rewarded video name in Rewarded video IAP
 
 #
 <details>
