@@ -53,7 +53,7 @@ In this version, we've made the following updates:
 <details>
   <summary></summary>
   
-  - Unity Editor 2021.2 or higher (2022 LTS version)
+  - Unity Editor 2022 or higher (2022 LTS version)
   - Android:
     - Minimum SDK: Lollipop 5.0 (API 22)
     - Scripting backend: IL2CPP
