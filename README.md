@@ -13,13 +13,12 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.3.6 (Released: 20/03/2024)
+#### Current Version: 1.3.7 (Released: 25/04/2024)
 
 In this version, we've made the following updates:
 
-- New parameters for in app events
-- More Playtime data
-- Add Rewarded video name in Rewarded video IAP
+- Send coins data in level
+- Update adaptors
 
 #
 <details>
