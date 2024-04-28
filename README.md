@@ -72,7 +72,7 @@ In this version, we've made the following updates:
 <details>
   <summary></summary>
 
-  The current version of the MOON SDK is version 1.3.5    (Slack bot is sending the link) 
+  The current version of the MOON SDK is version 1.3.7    (Slack bot is sending the link) 
   
 </details>
   
@@ -262,6 +262,7 @@ We utilize two key events related to game level progression: LevelDataStartEvent
 `LevelDataStartEvent` is sent at the begginig of the level.
 
      MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
+     MoonSDK.SendLevelDataStartEvent($"{GameModel.levelIndex + 1}", GameController.GameModel.softCurrencyAmount, iAPController.lastPurchaseID);
 
 `LevelDataCompleteEvent`  is sent at the end of the level:
 1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
@@ -273,6 +274,7 @@ We utilize two key events related to game level progression: LevelDataStartEvent
 Use it as described below:
 
      MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
+     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, $"{GameController.GameModel.levelIndex + 1}", LevelResult.win, isContinue, GameController.GameModel.softCurrencyAmount);
 
 For the in game store data, use the following (the rest is aoutomatic):
 
