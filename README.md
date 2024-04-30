@@ -224,15 +224,6 @@ Exsample:
 </details>
 
 
-### Adjust UA Events
-<details>
-  <summary></summary>
-  
-     void MoonSDK.sendUAEvent(UAEventType.eventType);
-     MoonSDK.SendUAEvent(MoonSDK.UAEventType.Type1);
-     
-</details>
-
 ### In-app purchase (IAP) Events:
 <details>
   <summary></summary>
@@ -243,12 +234,12 @@ Please ensure that the event is triggered from every available location where th
 
 After each successful purchase you need to send event to adjust:
 
-      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType)
-      await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product);
+      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelName = "default")
+      await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product, "0001");
 
 Example:
 
-      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription);
+      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, $"{LevelNumber}");
 
 </details>
 
@@ -261,20 +252,20 @@ We utilize two key events related to game level progression: LevelDataStartEvent
 
 `LevelDataStartEvent` is sent at the begginig of the level.
 
-     MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
-     MoonSDK.SendLevelDataStartEvent($"{GameModel.levelIndex + 1}", GameController.GameModel.softCurrencyAmount, iAPController.lastPurchaseID);
+     MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount, purchaseIDs);
 
 `LevelDataCompleteEvent`  is sent at the end of the level:
 1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
-2. `LevelResult` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
-3. `isContinueLevel` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
+2. `LevelNumber` - Indicates level index
+3. `LevelResult` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
+4. `isContinueLevel` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
      option. If the game doesn't have these features, it should be set to false by default.
-4. Data related to time spent in the game's store
+5. Data related to time spent in the game's store
+6. Data related to coins spent in the game during the level.
 
 Use it as described below:
 
-     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
-     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, $"{GameController.GameModel.levelIndex + 1}", LevelResult.win, isContinue, GameController.GameModel.softCurrencyAmount);
+     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount);
 
 For the in game store data, use the following (the rest is aoutomatic):
 
