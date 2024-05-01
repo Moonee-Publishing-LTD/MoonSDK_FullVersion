@@ -232,6 +232,11 @@ To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you'v
 Go to receipt Validation Obfuscator , paste the google public key of your app and press “Obfuscate Google Play License Key”.
 Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios
 
+In-app purchase (IAP) Event contains the following parameters:
+1. `iAPType` - Refer to the different types of in-app purchaseS:
+    A. `product` - A one-time purchase.
+    B. `Subscription` - A product that allows users to purchase content for a defined period. 
+3. `levelName` -  Specifies the level where the in-app purchase was made.
 After each successful purchase you need to send event to adjust:
 
       public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelName = "default")
@@ -254,7 +259,10 @@ We utilize two key events related to game level progression: LevelDataStartEvent
 1. `coinsAmount` - Indicates the main currency current amount (In level 1, if the users start with 0, send 0.)
 2. `purchaseIDs` - Indicates which in-app purchases the user made before starting this level, since the last time this event was sent.
 
+Use it as described below:
+
      MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount, purchaseIDs);
+
 
 `LevelDataCompleteEvent`  is sent at the end of the level:
 1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
@@ -267,6 +275,14 @@ We utilize two key events related to game level progression: LevelDataStartEvent
 Use it as described below:
 
      MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount);
+
+
+For the in game store data, use the following (the rest is aoutomatic):
+
+      MoonSDK.OpenInGameStore(); // Execute when user opens the store
+      MoonSDK.CloseInGameStore(); // Execute when user closes the store
+
+      
 
 For the in game store data, use the following (the rest is aoutomatic):
 
