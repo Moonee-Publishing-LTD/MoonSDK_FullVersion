@@ -34,9 +34,8 @@ In this version, we've made the following updates:
       C. [Banner Ads](#banner-ads-api)
   6. [Events](#events)  
       A. [Analytic Events](#analytic-events)  
-      B. [Adjust UA Events](adjust-ua-events)  
-      C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-      D. [Progression events](#progression-events)  
+      B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
+      C. [Progression events](#progression-events)  
   7.  [Firebase Configuration](#firebase-configuration)
   8.  [CMP - GDPR Consent](#cmp---gdpr-consent)
   9. [In-Game Fonts](#in-game-fonts)
@@ -201,10 +200,9 @@ To use the advertisement manager add the following namespace:
 <details>
   <summary></summary>
   
-A. [Analytic Events](#analytic-events)  
-B. [Adjust UA Events](adjust-ua-events)  
-C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-D. [Progression events](#progression-events)  
+A. [Analytic Events](#analytic-events)   
+B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
+C. [Progression events](#progression-events)  
   
 ### Analytic Events
 <details>
