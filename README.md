@@ -234,10 +234,10 @@ In-app purchase (IAP) Event contains the following parameters:
 1. `iAPType` - Refer to the different types of in-app purchaseS:
     A. `product` - A one-time purchase.
     B. `Subscription` - A product that allows users to purchase content for a defined period. 
-3. `levelName` -  Specifies the level where the in-app purchase was made.
+3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
 After each successful purchase you need to send event to adjust:
 
-      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelName = "default")
+      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelNumber = "default")
       await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product, "0001");
 
 Example:
@@ -264,7 +264,7 @@ Use it as described below:
 
 `LevelDataCompleteEvent`  is sent at the end of the level:
 1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
-2. `levelIndex` - Indicates level index
+2. `levelIndex` - Indicates level index, Make sure to send it as `0001` and not in other formats `001` or `1`. Make sure to start from level `0001` and not from `0000`.
 3. `LevelResult` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
 4. `isContinue` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
      option. If the game doesn't have these features, it should be set to false by default.
