@@ -287,6 +287,8 @@ For the in game store data, use the following (the rest is aoutomatic):
       MoonSDK.OpenInGameStore(); // Execute when user opens the store
       MoonSDK.CloseInGameStore(); // Execute when user closes the store
 
+**Note!** Rememeber to add every Rewarded Video you are using! 
+See more in [Rewarded Video Ads](#rewarded-video-ads-api)
       
 **Levels progression events using GameAnalytics:**  
 
@@ -527,7 +529,8 @@ Get check for the following:
   - We get the following events:
     - `levelDataStart`
     - `levelDataComplete` events from the app
-    - We get `consent` event
+    - `consent` event
+  - Test the build on a device in addition to the editor. Editor itself is not a sufficient environment.
 </details>
 
 # Good Luck! 
