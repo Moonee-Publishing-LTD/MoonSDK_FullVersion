@@ -251,7 +251,7 @@ Example:
   <summary></summary>
   
 **Levels progression events using Adjust:**  
-We utilize two key events related to game level progression: LevelDataStartEvent and LevelDataCompleteEvent.
+We utilize two key events related to game level progression: `LevelDataStartEvent` and `LevelDataCompleteEvent`.
 
 `LevelDataStartEvent` is sent at the beginning of the level
 1. `coinsAmount` - Indicates the main currency current amount (In level 1, if the users start with 0, send 0.)
