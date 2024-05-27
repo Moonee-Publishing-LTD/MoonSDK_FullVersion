@@ -235,14 +235,21 @@ In-app purchase (IAP) Event contains the following parameters:
     A. `product` - A one-time purchase.
     B. `Subscription` - A product that allows users to purchase content for a defined period. 
 3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
+
 After each successful purchase you need to send event to adjust:
+
+
 
       public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelNumber = "default")
       await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product, "0001");
 
+
+
 Example:
 
+
       System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, $"{LevelNumber}");
+
 
 </details>
 
