@@ -294,8 +294,8 @@ For the in game store data, use the following (the rest is aoutomatic):
       MoonSDK.OpenInGameStore(); // Execute when user opens the store
       MoonSDK.CloseInGameStore(); // Execute when user closes the store
 
-**Note!** Rememeber to add every Rewarded Video you are using! 
-See more in [Rewarded Video Ads](#rewarded-video-ads-api)
+**Note!** Rememeber to add every Rewarded Video you are using!   
+Adding the folowing part `"rewardedVideoName");` at the end of the function mentioned [here](#rewarded-video-ads-api)
       
 **Levels progression events using GameAnalytics:**  
 
