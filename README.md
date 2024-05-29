@@ -20,32 +20,34 @@ In this version, we've made the following updates:
 - Send coins data in level
 - Update adaptors
 
-#
+# Table of Contents
 <details>
-  <summary>Table of Contents</summary>
-  
-  1. [System Requirements](#system-requirements)
-  2. [Downloading MOON SDK](#downloading-moon-sdk)
-  3. [Setting Up Moon SDK](#setting-up-moon-sdk)
-  4. [Initialization](#initialization)
-  5. [Displaying Ads](#displaying-ads)  
-      A. [Rewarded Video Ads](#rewarded-video-ads-api)  
-      B. [Interstitial Ads](#interstitial-ads-api)  
-      C. [Banner Ads](#banner-ads-api)
-  6. [Events](#events)  
-      A. [Analytic Events](#analytic-events)  
-      B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-      C. [Progression events](#progression-events)  
-  7.  [Firebase Configuration](#firebase-configuration)
-  8.  [CMP - GDPR Consent](#cmp---gdpr-consent)
-  9. [In-Game Fonts](#in-game-fonts)
-  10. [Rate Us View](#rate-us-view)
-  11. [Platform Configuration - If Not Yet Added](#platform-configuration---if-not-yet-added)  
+  <summary></summary>
+
+1. [System Requirements](#system-requirements)
+2. [Downloading MOON SDK](#downloading-moon-sdk)
+3. [Setting Up Moon SDK](#setting-up-moon-sdk)
+4. [Initialization](#initialization)
+5. [Displaying Ads](#displaying-ads)  
+   A. [Rewarded Video Ads](#rewarded-video-ads-api)  
+   B. [Interstitial Ads](#interstitial-ads-api)  
+   C. [Banner Ads](#banner-ads-api)
+6. [Events](#events)  
+   A. [Analytic Events](#analytic-events)  
+   B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
+   C. [Progression events](#progression-events)
+7. [Firebase Configuration](#firebase-configuration)
+8. [CMP - GDPR Consent](#cmp---gdpr-consent)
+9. [In-Game Fonts](#in-game-fonts)
+10. [Rate Us View](#rate-us-view)
+11. [Platform Configuration - If Not Yet Added](#platform-configuration---if-not-yet-added)  
     A. [Facebook](#facebook)  
     B. [Game Analytics](#game-analytics)
-  12. [Testing](#testing)
+12. [Testing](#testing)
+13. [Common Issues](#common-issues)
 
 </details>
+
 
 ## System Requirements
 <details>
@@ -540,6 +542,22 @@ Get check for the following:
     - `levelDataComplete` events from the app
     - `consent` event
   - Test the build on a device in addition to the editor. Editor itself is not a sufficient environment.
+</details>
+
+
+## Common Issues
+<details>
+  <summary></summary>  
+Commen issues can be found here as well as in the "issue" section.  
+Please add your comments there as well, to allow other to gain from it.  
+
+**Importnat comments:**
+1. Please remove External Dependency manager folder from the project and import the latest one.
+2. After adding the keys and tokens, make sure **not** to disable the checkmarks for the basic.
+3. Plaese copy/paste the keys without space to avoid mistakes
+4. Use both methods of progression events: to Adjust and to Game Analytics. Soon we will be changing it to one method sending to both platforms.
+5. When updating the SDK version, pleaese remove MoonSDK folder and after that import the new package.
+   
 </details>
 
 # Good Luck! 
