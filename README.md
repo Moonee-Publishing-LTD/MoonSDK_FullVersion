@@ -89,6 +89,7 @@ In this version, we've made the following updates:
      ![MoonSDKScene](images/MoonSDKScene.png)
      
   4. Open MoonSDK settings and fill in all app keys for analytics and advertising services which you want to use and press Check and Sync Settings button
+     **Note! Make sure to copy/paste the tokens and not type it manually to avoid mistakes**
     
      ![SyncSettings](images/SyncSettings.png)
 </details>
