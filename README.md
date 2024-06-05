@@ -309,7 +309,9 @@ Adding the folowing part `"rewardedVideoName");` at the end of the function ment
 
 **Note**: In this part it is crutial to check:  
      - **A.** Token to Adjust for EACH event  
-     - **B.**  No spaces before and after the token 
+     - **B.**  No spaces before and after the token    
+     - **C** Make sure to **copy/paste** the tokens!!!   
+     
 </details>
 </details>
 
