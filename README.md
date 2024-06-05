@@ -20,6 +20,8 @@ In this version, we've made the following updates:
 - Send coins data in level
 - Update adaptors
 
+Note: The inspector is asking you for a sesson toke, please leave it empty for now.
+
 # Table of Contents
 <details>
   <summary></summary>
