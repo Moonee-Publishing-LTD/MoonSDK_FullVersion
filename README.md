@@ -565,9 +565,9 @@ Please add your comments there as well, to allow other to gain from it.
 3. Plaese copy/paste the keys without space to avoid mistakes
 4. Use both methods of progression events: to Adjust and to Game Analytics. Soon we will be changing it to one method sending to both platforms.
 5. When updating the SDK version, pleaese remove MoonSDK folder and after that import the new package.
-6. If you don't have an in app in the game, send string.Empty
-7. If IAP event is arriving, but missing the level_name or number (depend on SDK version, reimport the package as shown in the picture below.
-![reimportPackage](images/reimportPackage.png.png)
+6. If you don't have an in app in the game, send string.Empty  
+7. If IAP event is arriving, but missing the level_name or number (depend on SDK version, reimport the package as shown in the picture below.  
+![reimportPackage](images/reimportPackage.png)
    
 </details>
 
