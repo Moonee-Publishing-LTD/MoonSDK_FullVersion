@@ -260,6 +260,9 @@ Example:
       System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, $"{LevelNumber}");
 
 
+
+![obfuscation](images/obfuscation.png)
+
 </details>
 
 ### Progression Events
