@@ -347,27 +347,24 @@ Adding the folowing part `"rewardedVideoName");` at the end of the function ment
 **Firebase Remote Config** 
 
 Moon SDK by default uses some default remote config values:
-
-1. `int_grace_time`: Interstitials Grace Time - time (in seconds) from app first use until first INT.
-2. `Int_grace_level: Interstitials Grace Level-  after which level first INT will be shown.
-3. `cooldown_between_INTs`: Cooldown Between Interstitials -  timer (in seconds) for spaces between INTs.
-4. `cooldown_after_RVs`: Cooldown After Rewarded Videos- time (in seconds) for INT AFTER watching a Rewarded video.( Replace cooldown_between_int ).
-5. `Show_int_if_fail`: Show Interstitial If Fail 	
+1. `int_sessions_grace`: Interstitials sessions grace - sessions grace untill interstitial.
+2. `cooldown_between_INTs`: Cooldown Between Interstitials -  timer (in seconds) for spaces between INTs.
+3. `cooldown_after_RVs`: Cooldown After Rewarded Videos- time (in seconds) for INT AFTER watching a Rewarded video.( Replace cooldown_between_int ).
+4. `show_int_if_fail`: Show Interstitial If Fail 	
 `True`: player gets ads after each level, regardless of success status,
 `False`:  player gets ads after success levels only.
-6. `INT_in_stage`: Interstitials In Stage,
+5. `int_in_stage`: Interstitials In Stage,
 `True`: player gets ads during stages
 `False`: player gets ads after stages only
 
 **Default values:**
-`int_grace_time`: 30 sec
-`Int_grace_level`: 1 level
+`int_sessions_grace`: 0 sec
 `cooldown_between_INTs`: 20 sec
 `cooldown_after_RVs`: 20 sec
-`Show_int_if_fail`: False
-`INT_in_stage`: False
+`show_int_if_fail`: False
+`int_in_stage`: False
 
-Note that `int_grace_time`, `cooldown_between_INTs`, `cooldown_after_RVs` are managed automatically by Moon SDK and you don’t need to do anything with that, but the rest values you need to check before showing ads.
+Note that `int_sessions_grace`, `cooldown_between_INTs`, `cooldown_after_RVs` are managed automatically by Moon SDK and you don’t need to do anything with that, but the rest values you need to check before showing ads.
 
 
        if(currentLevel > RemoteConfigValues.int_grace_level)
