@@ -463,6 +463,8 @@ By adhering to these guidelines, you ensure that your game uses licensed fonts r
 You can open rate us screen using code example below
 
      MoonSDK.OpenRateUsScreen();
+
+The SDK rate us logic is just a default one, You can overwrite it with your own UI and logic.
      
 </details>
 
@@ -566,8 +568,11 @@ Please add your comments there as well, to allow other to gain from it.
 4. Use both methods of progression events: to Adjust and to Game Analytics. Soon we will be changing it to one method sending to both platforms.
 5. When updating the SDK version, pleaese remove MoonSDK folder and after that import the new package.
 6. If you don't have an in app in the game, send string.Empty  
-7. If IAP event is arriving, but missing the level_name or number (depend on SDK version, reimport the package as shown in the picture below.  
+7. If IAP event is arriving, but missing the level_name or number (depend on SDK version, reimport the package as shown in the picture below.
 ![reimportPackage](images/reimportPackage.png)
+8. The SDK rate us logic is just a default one, You can overwrite it with your own UI and logic.
+9. `PurchaseEventArg`s error:You need to install iAP plugin via package manager.
+10. `NewtonSoft` error: import `NewtonSoft.Json.dll` library under plugins folder
    
 </details>
 
