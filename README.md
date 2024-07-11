@@ -13,12 +13,14 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.3.7 (Released: 25/04/2024)
+#### Current Version: 1.3.9 (Released: 11/07/2024)
 
 In this version, we've made the following updates:
 
-- Send coins data in level
-- Update adaptors
+- Send moves per level
+- Update adaptors (Including Facebook)
+- IAP catalog
+- Sending level events with one function to Adjust and Game Analytics 
 
 Note: The inspector is asking you for a sesson toke, please leave it empty for now.
 
