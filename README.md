@@ -45,8 +45,12 @@ Note: The inspector is asking you for a sesson toke, please leave it empty for n
 11. [Platform Configuration - If Not Yet Added](#platform-configuration---if-not-yet-added)  
     A. [Facebook](#facebook)  
     B. [Game Analytics](#game-analytics)
-12. [Testing](#testing)
-13. [Common Issues](#common-issues)
+12. [DATA Safety](#data-safety)  
+      A. [Android](#android)  
+      B. [iOS](#ios)  
+      C. [Facebbok Data Checkup](#facebbok-data-checkup)  
+13. [Testing](#testing)
+14. [Common Issues](#common-issues)
 
 </details>
 
@@ -544,6 +548,153 @@ Get check for the following:
   - Test the build on a device in addition to the editor. Editor itself is not a sufficient environment.
 </details>
 
+## DATA Safety
+<details>
+  <summary></summary>
+
+### Android
+<details>
+  <summary></summary>
+To complete the Data Safety form required by the Google Store, please adhere to the following steps:
+
+Access the Google Play Console for your application.
+Navigate to the "Data safety" section within the console.
+Answer the questions as below:  
+
+**Overview:**  
+Please read the following instructions carefully to ensure that you are not collecting data beyond the parameters outlined below. If, however, you find that you are inadvertently collecting additional data, please promptly contact us for further assistance. It is essential to adhere strictly to the specified data collection guidelines to maintain compliance and transparency with our policies.  
+
+**Data collection and security:**  
+Does your app collect or share any of the required user data types? _Yes_
+  - Is all of the user data collected by your app encrypted in transit? _Yes_
+  - Which of the following methods of account creation does your app support? _My app does not allow users to create an account_
+  - Do you provide a way for users to request that their data is deleted? (Optional) _No_ 
+
+**Data types:**  
+Select all of the user data types collected or shared by your app.
+- Location: _None_
+- Personal info: _None_
+- Financial info: _None_
+- Health and fitness: _None_
+- Messages: _None_
+- Photos and videos: _None_
+- Audio files: _None_
+- Files and docs: _None_
+- Calendar: _None_
+- Contacts: _None_
+- App activity: App interactions (Information about how a user interacts with your app. For example, the number of times they visit a page, or what they tap on.)
+- Web browsing: _None_
+- App info and performance: Crash logs
+- Device or other IDs: Device or other IDs
+
+**Data usage and handling** _Manage in the errow for both types:_
+
+App Activity / App interactions:
+  - Is this data collected, shared, or both? _Collected_
+  - Is this data processed ephemerally? _Yes, this collected data is processed ephemerally_
+  - Is this data required for your app, or can users choose whether it's collected? _Data collection is required_
+  - Why is this user data collected? App functionality, Analytics, Advertising or marketing
+
+Device or other IDs:
+  - Is this data collected, shared, or both? _Collected_
+  - Is this data processed ephemerally? _Yes, this collected data is processed ephemerally_
+  - Is this data required for your app, or can users choose whether it's collected? _Data collection is required_
+  - Why is this user data collected? _App functionality, Analytics, Advertising or marketing_
+    
+**Preview:**  
+See that all of the above is correct, and press save.
+If you can't see the save button, there are 3dots there, that "save" is one othe options in them.
+
+</details>
+
+
+### iOS
+<details>
+  <summary></summary>
+To complete the Data Safety form required by the App Store, please adhere to the following steps:
+
+Access the App Play Connect for your application.
+Navigate to the "App Privacy" section within the console.
+Answer the questions as below:  
+
+**Privacy Policy**  
+User Privacy Choices URL: Please provide Moonne's URL: https://moonee.io/privacy-policy/
+
+**Data Collection**  
+Do you or your third-party partners collect data from this app? _Yes, we collect data from this app_
+
+**Data Types**  
+- Contact Info: _None_
+- Health & Fitness: _None_
+- Financial Info: _None_
+- Location: _None_
+- Sensitive Info: _None_
+- Contacts: _None_
+- User Content: _None_
+- Browsing History: _None_
+- Search History: _None_
+- Identifiers: _Device ID_
+- Usage Data: _Product Interaction,Advertising Data_
+- Diagnostics: _Crash Data, Performance Data_
+- Surroundings: _None_
+- Body: _None_
+- Other Data: _None_
+
+
+Identifiers/ Device ID:
+- Indicate how device IDs collected from this app are being used by you or your third-party partners? _Third-Party Advertising,Developer’s Advertising or Marketing_
+- Are the device IDs collected from this app linked to the user’s identity? _No, device IDs collected from this app are not linked to the user’s identity_
+- Do you or your third-party partners use device IDs for tracking purposes? _Yes, we use device IDs for tracking purposes_
+
+Usage Data/ Product Interaction:
+- Indicate how Product Interaction collected from this app are being used by you or your third-party partners? _Third-Party Advertising, Developer’s Advertising or Marketing, Analytics,Product Personalization, App Functionality_
+- Are the Product Interaction data collected from this app linked to the user’s identity? _No, Product Interaction data collected from this app are not linked to the user’s identity_
+- Do you or your third-party partners use device IDs for tracking purposes? _Yes, we use device IDs for tracking purposes_
+
+Usage Data/ Advertising Data:
+- Indicate how Advertising Data collected from this app are being used by you or your third-party partners? _Third-Party Advertising,Developer’s Advertising or Marketing, Analytics,Product Personalization, App Functionality_
+- Are the Advertising Data collected from this app linked to the user’s identity? _No, Advertising Data collected from this app are not linked to the user’s identity_
+- Do you or your third-party partners use Advertising Data for tracking purposes? _Yes, we use Advertising Data for tracking purposes_
+
+Diagnostics/ Crash Data:
+- Indicate how crash data collected from this app are being used by you or your third-party partners? _Developer’s Advertising or Marketing, Analytics_
+- Are the crash data collected from this app linked to the user’s identity? _No, crash data collected from this app are not linked to the user’s identity_
+- Do you or your third-party partners use crash data for tracking purposes? _Yes, we use crash data for tracking purposes_
+
+Diagnostics/ Performance Data:
+- Indicate how performance data collected from this app are being used by you or your third-party partners? _Third-Party Advertising, Developer’s Advertising or Marketing, Analytics,Product Personalization, App Functionality_
+- Are the performance data collected from this app linked to the user’s identity? _No, performance data collected from this app are not linked to the user’s identity_
+- Do you or your third-party partners use performance data for tracking purposes? _Yes, we use performance data for tracking purposes_
+
+</details>  
+
+### Facebbok Data heckup 
+<details>
+  <summary></summary>
+  
+In case the Facebook UI is asking to craete data check up, use the following:  
+Go to [https://developers.facebook.com/]  
+Sign in and go to the app, the Data checkup will pop up  
+1. Click on your app and press next  
+![FB1](images/FB1.png)  
+2. Under Do you have data controller choose No, Add data processor  
+![FB2](images/FB2.png)  
+3. Insert Moonee Publishing LTD as your data processor. From the category choose Advertising and Analytics and measurement. From the list of countries choose Israel and Poland  
+![FB3](images/FB3.png)  
+![FB4](images/FB4.png)  
+4. For Have you provided the personal data of user to public authorities choose No, and for Which of the following processes do you have in place choose Required review of the legality of these requests and press next/  
+![FB5](images/FB5.png)  
+5. Tick all the boxes and press next.  
+![FB6](images/FB6.png)  
+6. Insert the Google Play store link and fill in the answers to the rest of the questions as following:  
+![FB7](images/FB7.png)  
+7. Same for iOS, insert the App Store link and fill in the answesr to the rest of the questions as following:  
+![FB8](images/FB8.png)  
+8. Tick the box and finish the checkup  
+![FB9](images/FB9.png)  
+
+</details>
+</details>
 
 ## Common Issues
 <details>
