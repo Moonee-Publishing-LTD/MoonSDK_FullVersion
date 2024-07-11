@@ -195,11 +195,9 @@ To use the advertisement manager add the following namespace:
 <details>
   <summary>Expand</summary>
 
-      void AdvertisementManager.ShowBanner()
-      AdvertisementManager.ShowBanner();
-
+      AdvertisementManager.ShowBanner()
+      
       AdvertisementManager.HideBanner();
-      void AdvertisementManager.HideBanner();
       
 </details>
 
@@ -218,7 +216,7 @@ C. [Progression events](#progression-events)
   <summary></summary>
 With Moon SDK you can send custom events to various analytics services
   
-       Void  MoonSDK.TrackCustomEvent("Event name", [Dictionary <string, object> eventProperties = null],
+      MoonSDK.TrackCustomEvent("Event name", [Dictionary <string, object> eventProperties = null],
       [string type = null],
       [List < MoonSDK.AnalyticsProvider> analyticsProviders = null])
       
@@ -289,18 +287,16 @@ Use it as described below:
 4. `isContinue` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
      option. If the game doesn't have these features, it should be set to false by default.
 5. `coinsAmount` - Shows the current amount of the main currency once the level is completed.
+6. `movesAmount` - The number of moves the player made to complete the level.
 
 Use it as described below:
 
-     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount);
-
+     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount, movesAmount);
 
 For the in game store data, use the following (the rest is aoutomatic):
 
       MoonSDK.OpenInGameStore(); // Execute when user opens the store
       MoonSDK.CloseInGameStore(); // Execute when user closes the store
-
-      
 
 For the in game store data, use the following (the rest is aoutomatic):
 
@@ -310,13 +306,6 @@ For the in game store data, use the following (the rest is aoutomatic):
 **Note!** Rememeber to add every Rewarded Video you are using!   
 Adding the folowing part `"rewardedVideoName");` at the end of the function mentioned [here](#rewarded-video-ads-api)
       
-**Levels progression events using GameAnalytics:**  
-
-
-      void MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents eventType, int levelIndex);
-      MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents.Start, 1);
-
-
 **Note**: In this part it is crutial to check:  
      - **A.** Token to Adjust for EACH event  
      - **B.**  No spaces before and after the token    
