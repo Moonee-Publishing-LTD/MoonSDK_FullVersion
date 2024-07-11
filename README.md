@@ -268,7 +268,7 @@ Example:
 <details>
   <summary></summary>
   
-**Levels progression events using Adjust:**  
+**Levels progression events sends events to Adjust and Game Analytics:**  
 We utilize two key events related to game level progression: `LevelDataStartEvent` and `LevelDataCompleteEvent`.
 
 `LevelDataStartEvent` is sent at the beginning of the level
