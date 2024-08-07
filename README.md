@@ -163,6 +163,9 @@ To use the advertisement manager add the following namespace:
       
       Bool AdvertisementManager.IsRewardedAdReady()
       AdvertisementManager.IsRewardedAdReady();
+
+
+**Note:** If you see interstitial ads being displayed instead of rewarded videos, this is intentional. In some cases, the SDK will identify a more revenue-optimizing option and utilize it.
 </details>
 
   ### Interstitial ads API:
@@ -719,6 +722,7 @@ Please add your comments there as well, to allow other to gain from it.
 8. The SDK rate us logic is just a default one, You can overwrite it with your own UI and logic.
 9. `PurchaseEventArg`s error:You need to install iAP plugin via package manager.
 10. `NewtonSoft` error: import `NewtonSoft.Json.dll` library under plugins folder
+11. If you see interstitial ads being displayed instead of rewarded videos, this is intentional. In some cases, the SDK will identify a more revenue-optimizing option and utilize it.
    
 </details>
 
