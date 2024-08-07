@@ -213,62 +213,13 @@ To use the advertisement manager add the following namespace:
 <details>
   <summary></summary>
   
-A. [Analytic Events](#analytic-events)   
+A. [Progression events](#progression-events)  
 B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-C. [Progression events](#progression-events)  
+C. [Custom Events](#custom-events)   
   
-### Analytic Events
-<details>
-  <summary></summary>
-With Moon SDK you can send custom events to various analytics services
-  
-      MoonSDK.TrackCustomEvent("Event name", [Dictionary <string, object> eventProperties = null],
-      [string type = null],
-      [List < MoonSDK.AnalyticsProvider> analyticsProviders = null])
-      
-Call this method to track any custom event you want.  
-eventName = the name of the event to track.  
-Exsample:  
-      
-      MoonSDK.TrackCustomEvent("Event name", MoonSDK.AnalyticsProvider.Firebase);
-  
-</details>
-
-
-### In-app purchase (IAP) Events:
-<details>
-  <summary></summary>
-  
-To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you've configured the Adjust app token and the IAP revenue event token within the Moon SDK settings.  
-Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.  
-Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
-If you don't have an in app in the game, send `string.Empty`
-
-In-app purchase (IAP) Event contains the following parameters:
-1. `iAPType` - Refer to the different types of in-app purchaseS:
-    A. `product` - A one-time purchase.
-    B. `Subscription` - A product that allows users to purchase content for a defined period. 
-3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
-
-After each successful purchase you need to send event to adjust:
 
 
 
-      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelNumber = "default")
-      await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product, "0001");
-
-
-
-Example:
-
-
-      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, $"{LevelNumber}");
-
-
-
-![obfuscation](images/obfuscation.png)
-
-</details>
 
 ### Progression Events
 <details>
@@ -318,6 +269,58 @@ Adding the folowing part `"rewardedVideoName");` at the end of the function ment
      - **C** Make sure to **copy/paste** the tokens!!!   
      
 </details>
+
+### In-app purchase (IAP) Events:
+<details>
+  <summary></summary>
+  
+To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you've configured the Adjust app token and the IAP revenue event token within the Moon SDK settings.  
+Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.  
+Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
+If you don't have an in app in the game, send `string.Empty`
+
+In-app purchase (IAP) Event contains the following parameters:
+1. `iAPType` - Refer to the different types of in-app purchaseS:
+    A. `product` - A one-time purchase.
+    B. `Subscription` - A product that allows users to purchase content for a defined period. 
+3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
+
+After each successful purchase you need to send event to adjust:
+
+
+
+      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelNumber = "default")
+      await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product, "0001");
+
+
+
+Example:
+
+
+      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, $"{LevelNumber}");
+
+![obfuscation](images/obfuscation.png)
+
+</details>
+
+### Custom Events
+<details>
+  <summary></summary>
+The following is only for advance games, that have a need for custom events:  
+With Moon SDK you can send custom events to various analytics services
+  
+      MoonSDK.TrackCustomEvent("Event name", [Dictionary <string, object> eventProperties = null],
+      [string type = null],
+      [List < MoonSDK.AnalyticsProvider> analyticsProviders = null])
+      
+Call this method to track any custom event you want.  
+eventName = the name of the event to track.  
+Exsample:  
+      
+      MoonSDK.TrackCustomEvent("Event name", MoonSDK.AnalyticsProvider.Firebase);
+  
+</details>
+
 </details>
 
 ## Firebase Configuration
