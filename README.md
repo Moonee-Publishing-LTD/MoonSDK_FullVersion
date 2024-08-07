@@ -37,9 +37,9 @@ Note: The inspector is asking you for a sesson toke, please leave it empty for n
    B. [Interstitial Ads](#interstitial-ads-api)  
    C. [Banner Ads](#banner-ads-api)
 6. [Events](#events)  
-   A. [Analytic Events](#analytic-events)  
-   B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-   C. [Progression events](#progression-events)
+  A. [Progression events](#progression-events)  
+  B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
+  C. [Custom Events](#custom-events)   
 7. [Firebase Configuration](#firebase-configuration)
 8. [CMP - GDPR Consent](#cmp---gdpr-consent)
 9. [In-Game Fonts](#in-game-fonts)
@@ -673,7 +673,7 @@ Diagnostics/ Performance Data:
 
 </details>  
 
-### Facebbok Data heckup 
+### Facebbok Data checkup 
 <details>
   <summary></summary>
   
