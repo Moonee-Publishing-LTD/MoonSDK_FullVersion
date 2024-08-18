@@ -244,8 +244,8 @@ Use it as described below:
 1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
 2. `levelIndex` - Indicates level index, Make sure to send it as `0001` and not in other formats `001` or `1`. Make sure to start from level `0001` and not from `0000`.
 3. `LevelResult` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
-4. `isContinue` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
-     option. If the game doesn't have these features, it should be set to false by default.
+4. `isContinue` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive. If a user enter the level for the first time execute event set isContinue = false, if user restart the level it is the same.  If you save progression during the level and load it, execute event with  isContinue = true.     
+     option. If the game doesn't have these features, it should be set to false by default. 
 5. `coinsAmount` - Shows the current amount of the main currency once the level is completed.
 6. `movesAmount` - The number of moves the player made to complete the level.
 
@@ -269,7 +269,8 @@ Adding the folowing part `"rewardedVideoName");` at the end of the function ment
 **Note**: In this part it is crutial to check:  
      - **A.** Token to Adjust for EACH event  
      - **B.**  No spaces before and after the token    
-     - **C** Make sure to **copy/paste** the tokens!!!   
+     - **C** Make sure to **copy/paste** the tokens!!!
+
      
 </details>
 
