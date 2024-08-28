@@ -81,7 +81,7 @@ Note: The inspector is asking you for a sesson toke, please leave it empty for n
 <details>
   <summary></summary>
 
-  The current version of the MOON SDK is version 1.3.7   
+  The current version of the MOON SDK is version 1.3.9    
   Slack bot is sending the link if you will type `FULL_SDK` 
   
 </details>
