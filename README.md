@@ -219,60 +219,95 @@ To use the advertisement manager add the following namespace:
 A. [Progression events](#progression-events)  
 B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
 C. [Custom Events](#custom-events)   
-  
 
-
-
+---
 
 ### Progression Events
+
 <details>
   <summary></summary>
   
-**Levels progression events sends events to Adjust and Game Analytics:**  
-We utilize two key events related to game level progression: `LevelDataStartEvent` and `LevelDataCompleteEvent`.
+**Level Progression Events:**  
+We utilize two key events related to game level progression: `LevelDataStartEvent` and `LevelDataCompleteEvent`. These events are sent to Adjust and Game Analytics.
 
-`LevelDataStartEvent` is sent at the beginning of the level
-1. `coinsAmount` - Indicates the main currency current amount (In level 1, if the users start with 0, send 0.)
-2. `purchaseIDs` - Indicates which in-app purchases the user made before starting this level, since the last time this event was sent.
+- `LevelDataStartEvent` is triggered at the beginning of the level.
+- `LevelDataCompleteEvent` is triggered at the end of the level and contains all data related to the player's actions during the level.
 
-Use it as described below:
+The `LevelDataStartEvent` includes information about the time spent between levels (engagement time), while the `LevelDataCompleteEvent` contains data on everything that happened during the level.
 
-     MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount, purchaseIDs);
+The image below represents the event flow:  
+![levels_order](images/levels_order.png)
 
+#### **`LevelDataStartEvent`**  
+This event is sent at the beginning of a level and includes data on the engagement time between levels. The following parameters are included:
 
-`LevelDataCompleteEvent`  is sent at the end of the level:
-1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
-2. `levelIndex` - Indicates level index, Make sure to send it as `1` int. Since we are sending that to GA, the SDK will trasfer that to `0001` to be allgned with Game Analytics format. Make sure to start from level `1` and not from `0`.
-3. `LevelResult` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
-4. `isContinue` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive. If a user enter the level for the first time execute event set isContinue = false, if user restart the level it is the same.  If you save progression during the level and load it, execute event with  isContinue = true.     
-     option. If the game doesn't have these features, it should be set to false by default. 
-5. `coinsAmount` - Shows the current amount of the main currency once the level is completed.
-6. `movesAmount` - The number of moves the player made to complete the level.
+1. **`coinsAmount`** – The player's current balance of the main currency.  
+   - Example: If a player ended the last level with 30 coins and didn't spend any, send `30`. If the player had 30 coins but spent 15 in the store, send `15`. In Level 1, if the player starts with 0 coins, send `0`.
 
-Use it as described below:
+2. **`purchaseIDs`** – The IDs of in-app purchases made before starting this level, since the last time this event was sent.
 
-     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount, movesAmount);
+Use the following function to send this event:
 
-For the in game store data, use the following (the rest is aoutomatic):
+```csharp
+MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount, purchaseIDs);
+```
 
-      MoonSDK.OpenInGameStore(); // Execute when user opens the store
-      MoonSDK.CloseInGameStore(); // Execute when user closes the store
+---
 
-For the in game store data, use the following (the rest is aoutomatic):
+#### **`LevelDataCompleteEvent`**  
+This event is sent at the end of a level and contains the following information:
 
-      MoonSDK.OpenInGameStore(); // Execute when user opens the store
-      MoonSDK.CloseInGameStore(); // Execute when user closes the store
+1. **`LevelStatus`** – The current status of the level:
+   - `"start"` – When the level begins.
+   - `"fail"` – If the player fails the level.
+   - `"complete"` – If the player completes the level.
+   
+2. **`levelIndex`** – The index of the level. Send this as an integer (e.g., `1`), which the SDK will convert to Game Analytics format (e.g., `0001`). Make sure the levels start from `1` (not `0`).
 
-**Note!** Rememeber to add every Rewarded Video you are using!   
-Adding the folowing part `"rewardedVideoName");` at the end of the function mentioned [here](#rewarded-video-ads-api)
-      
-**Note**: In this part it is crutial to check:  
-     - **A.** Token to Adjust for EACH event  
-     - **B.**  No spaces before and after the token    
-     - **C** Make sure to **copy/paste** the tokens!!!
+3. **`LevelResult`** – The result of the level, either `"win"` or `"fail"`.
 
-     
+4. **`isContinue`** – A boolean indicating whether the player is continuing from where they left off (`true`) or starting fresh (`false`). For idle or revive mechanics:
+   - If a player enters the level for the first time, set `isContinue = false`.
+   - If a player restarts the level or resumes from saved progress, set `isContinue = true`.
+   - If your game doesn't have this feature, set this to `false` by default.
+
+5. **`coinsAmount`** – The player's balance of the main currency at the end of the level.  
+   - Example: If the player started the level with 100 coins and earned 50 during the level, send `150`. If the player started with 900 coins and earned 15, send `915`. Make sure to send the event *after* updating the player's new balance.
+
+7. **`movesAmount`** – The total number of moves the player made during the level.
+
+Use the following function to send this event:
+
+```csharp
+MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount, movesAmount);
+```
+
+---
+
+#### **In-Game Store**  
+For tracking player interactions with the in-game store, use the following functions:
+
+```csharp
+MoonSDK.OpenInGameStore(); // Execute when user opens the store
+MoonSDK.CloseInGameStore(); // Execute when user closes the store
+```
+
+---
+
+#### **Rewarded Video Ads**  
+Remember to add every Rewarded Video used in the game. Append `"rewardedVideoName"` to the function as described in the [Rewarded Video Ads API section](#rewarded-video-ads-api).
+
+---
+
+**Important Notes:**
+- **A.** Ensure that a token is sent to Adjust for *each event*.
+- **B.** Double-check that there are no spaces before or after the token.
+- **C.** Always **copy/paste** the tokens to avoid errors.
+
 </details>
+
+--- 
+
 
 ### In-app purchase (IAP) Events:
 <details>
@@ -307,6 +342,8 @@ Example:
 
 </details>
 
+---
+
 ### Custom Events
 <details>
   <summary></summary>
@@ -325,7 +362,10 @@ Exsample:
   
 </details>
 
+---
+
 </details>
+
 
 ## Firebase Configuration
 <details>
