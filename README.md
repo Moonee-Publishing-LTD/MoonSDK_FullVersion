@@ -242,7 +242,7 @@ The image below represents the event flow:
 This event is sent at the beginning of a level and includes data on the engagement time between levels. The following parameters are included:
 
 1. **`coinsAmount`** – The player's current balance of the main currency.  
-   - Example: If a player ended the last level with 30 coins and didn't spend any, send `30`. If the player had 30 coins but spent 15 in the store, send `15`. In Level 1, if the player starts with 0 coins, send `0`.
+   - Example: If a player ended the last level with 30 coins and didn't spend any, send `30`. If the player had 30 coins but spent 15 in the store, send `15`. If I played level 1, during the level got 10 and lost 5. In the complete screen I was given 2 more. you should send: 10-5+2 = 7. In Level 1, if the player starts with 0 coins, send `0`.
 
 2. **`purchaseIDs`** – The IDs of in-app purchases made before starting this level, since the last time this event was sent.
 
