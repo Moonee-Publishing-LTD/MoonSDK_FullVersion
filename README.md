@@ -132,46 +132,70 @@ To use the advertisement manager add the following namespace:
 <details>
   <summary>Expand</summary>
 
-  Note a change: Add Rewarded video name 
-  
-       void AdvertisementManager.ShowRewardedAd
-       (
-         [Action OnStartAdEvent = null],
-         [Action OnFinishAdEvent = null],
-         [Action OnFailAdEvent = null],
-         [Action OnFinishRewardedVideowWithSuccessEvent = null]
-       )
-       
-       AdvertisementManager.ShowRewardedAd(
-        () => 
-        {
-            //Ad start logic
-        },
-        () =>
-        {
-            //Add finish logic
-        },
-        () =>
-        {
-            //Ad fail logic
-        },
-        () =>
-        {
-            //Add Reward logic
-        }, 
-        "rewardedVideoName"); // Add Rewarded video name
-      
-      Bool AdvertisementManager.IsRewardedAdReady()
-      AdvertisementManager.IsRewardedAdReady();
+#### Showing a Rewarded Video:
+Use the following method to display a rewarded video in your game:
+
+```csharp
+void AdvertisementManager.ShowRewardedAd
+(
+    [Action OnStartAdEvent = null],
+    [Action OnFinishAdEvent = null],
+    [Action OnFailAdEvent = null],
+    [Action OnFinishRewardedVideowWithSuccessEvent = null]
+)
+
+AdvertisementManager.ShowRewardedAd(
+    () => 
+    {
+        // Ad start logic
+    },
+    () =>
+    {
+        // Ad finish logic
+    },
+    () =>
+    {
+        // Ad fail logic
+    },
+    () =>
+    {
+        // Reward logic
+    },
+    "rewardedVideoName" // Add Rewarded Video Name here!
+);
+```
+
+#### Checking Ad Readiness:
+You can check if a rewarded video is ready using:
+
+```csharp
+Bool AdvertisementManager.IsRewardedAdReady()
+AdvertisementManager.IsRewardedAdReady();
+```
+
+---
+
+#### Displaying High-Income Ads (Listeners events):
+Once a high-income ad is loaded and ready, use `AdvertisementManager.OnHighSegmentationRewardedVideoReadyEventHandler` to display it immediately for higher potential revenue.
+
+---
+
+#### Key Notes:
+1. **Always include the Rewarded Video Name**: When calling `ShowRewardedAd()`, ensure that you provide the correct video name (e.g., `"RV_more_coins"`). Missing the video name can cause issues with tracking.
+2. **Handling interstitial ads**: If you notice that interstitial ads are being shown instead of rewarded videos, this is expected. The SDK might optimize revenue by choosing a more suitable ad format based on various factors.
+3. **For High-income ads**, ensure that `OnHighSegmentationRewardedVideoReadyEventHandler` is set up and used to display these ads quickly. Note the methos for interstitial high income is differnt than Rewarded Video.
 
 
-**Note:** If you see interstitial ads being displayed instead of rewarded videos, this is intentional. In some cases, the SDK will identify a more revenue-optimizing option and utilize it.
 </details>
 
   ### Interstitial ads API:
 <details>
   <summary>Expand</summary>
 
+#### Showing Interstitial ads:
+Use the following method to display an interstitial in your game:
+
+```csharp
       float AdvertisementManager.InterstitialTimer {get; private set;}
       double timeLeftForNextAd = AdvertisementManager.InterstitialTimer;
 
@@ -195,9 +219,25 @@ To use the advertisement manager add the following namespace:
         {
             //Ad fail logic
         });
+```
+#### Checking Ad Readiness:
+You can check if an interstitial is ready using:
 
+```csharp
         Bool AdvertisementManager.IsInterstitialdAdReady()
         AdvertisementManager.IsInterstitialdAdReady();
+```
+---
+
+#### Displaying High-Income Ads (Listeners events):
+Once a high-income ad is loaded and ready, use `AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler` to display it immediately for higher potential revenue.
+
+---
+
+#### Key Notes:
+1. For High-income ads, ensure that `AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler` is set up and used to display these ads quickly.
+2. When `AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler` is called, the interstitial ad timer is reset, and the ads are immediately ready to be shown.
+
 </details>
 
   ### Banner Ads API:
