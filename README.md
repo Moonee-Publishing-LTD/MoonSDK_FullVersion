@@ -276,18 +276,11 @@ This event is sent at the end of a level and contains the following information:
 
 7. **`movesAmount`** – The total number of moves the player made during the level.
 
-### Progression Events
+Use the following function to send this event:
 
-<details>
-  <summary></summary>
-  
-#### **Segmentation Events:**  
-There are two important events in the AdvertisementManager class:
-
-AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler
-AdvertisementManager.OnHighSegmentationRewardedVideoReadyEventHandler
-
-These events are triggered as soon as a high-income ad is loaded and ready to display. Use these events to show high-income ads in your game as quickly as possible. Note that when AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler is called, the interstitial ad timer is reset, and the ads are immediately ready to be shown.
+```csharp
+MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount, movesAmount);
+```
 
 ---
 
