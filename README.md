@@ -13,12 +13,13 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.3.6 (Released: 20/03/2024)
+#### Current Version: 1.4.0 (Released: 04/10/2024)
 
 In this version, we've made the following updates:
 
-- New parameters for in app events
-- More Playtime data
+- Android CMP update
+- iOS ATT fix
+- Collecting additional data for analytics
 
 #
 <details>
@@ -52,7 +53,7 @@ In this version, we've made the following updates:
 <details>
   <summary></summary>
   
-  - Unity Editor 2021.2 or higher (2021 LTS version)
+  - Unity Editor 2022.2 or higher (2022 LTS version)
   - Android:
     - Minimum SDK: Lollipop 5.0 (API 22)
     - Scripting backend: IL2CPP
@@ -72,7 +73,7 @@ In this version, we've made the following updates:
 <details>
   <summary></summary>
 
-  The current version of the MOON SDK is version 1.3.5    (Slack bot is sending the link) 
+  The current version of the MOON SDK is version 1.4.0    (Slack bot is sending the link) 
   
 </details>
   
@@ -118,15 +119,7 @@ To use the advertisement manager add the following namespace:
 <details>
   <summary>Expand</summary>
   
-       void AdvertisementManager.ShowRewardedAd
-       (
-         [Action OnStartAdEvent = null],
-         [Action OnFinishAdEvent = null],
-         [Action OnFailAdEvent = null],
-         [Action OnFinishRewardedVideowWithSuccessEvent = null]
-       )
-       
-       AdvertisementManager.ShowRewardedAd(
+        AdvertisementManager.ShowRewardedAd(
         () => 
         {
             //Ad start logic
@@ -144,25 +137,17 @@ To use the advertisement manager add the following namespace:
             //Add Reward logic
         });
       
-      Bool AdvertisementManager.IsRewardedAdReady()
-      AdvertisementManager.IsRewardedAdReady();
+        AdvertisementManager.IsRewardedAdReady();
 </details>
 
   ### Interstitial ads API:
 <details>
   <summary>Expand</summary>
 
-      float AdvertisementManager.InterstitialTimer {get; private set;}
-      double timeLeftForNextAd = AdvertisementManager.InterstitialTimer;
-
-      void AdvertisementManager.ShowInterstitial
-       (
-         [Action OnStartAdEvent = null],
-         [Action OnFinishAdEvent = null],
-         [Action OnFailAdEvent = null]
-       )
-       
-       AdvertisementManager.ShowInterstitial(
+        double timeLeftForNextAd = AdvertisementManager.InterstitialTimer;
+        AdvertisementManager.IsInterstitialdAdReady();
+        
+        AdvertisementManager.ShowInterstitial(
         () =>
         {
             //Ad start logic
@@ -176,19 +161,14 @@ To use the advertisement manager add the following namespace:
             //Ad fail logic
         });
 
-        Bool AdvertisementManager.IsInterstitialdAdReady()
-        AdvertisementManager.IsInterstitialdAdReady();
 </details>
 
   ### Banner Ads API:
 <details>
   <summary>Expand</summary>
 
-      void AdvertisementManager.ShowBanner()
       AdvertisementManager.ShowBanner();
-
       AdvertisementManager.HideBanner();
-      void AdvertisementManager.HideBanner();
       
 </details>
 
@@ -199,9 +179,8 @@ To use the advertisement manager add the following namespace:
   <summary></summary>
   
 A. [Analytic Events](#analytic-events)  
-B. [Adjust UA Events](adjust-ua-events)  
-C. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-D. [Progression events](#progression-events)  
+B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
+C. [Progression events](#progression-events)  
   
 ### Analytic Events
 <details>
@@ -214,21 +193,12 @@ With Moon SDK you can send custom events to various analytics services
       
 Call this method to track any custom event you want.  
 eventName = the name of the event to track.  
-Exsample:  
+Example:  
       
       MoonSDK.TrackCustomEvent("Event name", MoonSDK.AnalyticsProvider.Firebase);
   
 </details>
 
-
-### Adjust UA Events
-<details>
-  <summary></summary>
-  
-     void MoonSDK.sendUAEvent(UAEventType.eventType);
-     MoonSDK.SendUAEvent(MoonSDK.UAEventType.Type1);
-     
-</details>
 
 ### In-app purchase (IAP) Events:
 <details>
@@ -240,12 +210,11 @@ Please ensure that the event is triggered from every available location where th
 
 After each successful purchase you need to send event to adjust:
 
-      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType)
-      await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product);
+      public static  MoonSDK.TrackAdjustRevenueEvent(PurchaseEventArgs e, iAPType iAPType, string levelNumber)
 
 Example:
 
-      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription);
+       MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, "4");
 
 </details>
 
@@ -258,18 +227,26 @@ We utilize two key events related to game level progression: LevelDataStartEvent
 
 `LevelDataStartEvent` is sent at the begginig of the level.
 
-     MoonSDK.SendLevelDataStartEvent((GameModel.levelIndex + 1).ToString());
-
-`LevelDataCompleteEvent`  is sent at the end of the level:
-1. `LevelStatus` - Indicates the current status of the level, which could be "start" when the level begins, "fail" if the player fails to complete it, or "complete" if the player finishes it without winning.
-2. `LevelResult` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
-3. `isContinueLevel` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive   
-     option. If the game doesn't have these features, it should be set to false by default.
-4. Data related to time spent in the game's store
+1. `levelNumber` - Indicates the current level number
+2. `coinsAmount` - Represents the amount of soft currency when the level is finished
+3. `purchaseIDs` - A long string that represents the IAP (In-App Purchase) IDs made during the level
 
 Use it as described below:
 
-     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, (GameModel.levelIndex + 1).ToString(), LevelResult.win, isContinueLevel);
+     MoonSDK.SendLevelDataStartEvent(levelNumber, coinsAmount, purchaseIDs);
+
+`LevelDataCompleteEvent`  is sent at the end of the level:
+
+1. `levelNumber` - Indicates the current level number
+2. `result` - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
+3. `isContinueLevel` - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive option. If the game doesn't have these features, it should be set to false by default.
+4. `coinsAmount` - Represents the amount of soft currency when the level is finished
+5. `moves` - Represents the number of moves made during the level
+6. `customParameters` - This is a Dictionary<string, string> where you can track your own custom parameters. The key represents the parameter name, and the value represents the actual value of the parameter
+
+Use it as described below:
+
+     MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelNumber, LevelResult.win, isContinueLevel, customParamsDictionary);
 
 For the in game store data, use the following (the rest is aoutomatic):
 
@@ -277,16 +254,9 @@ For the in game store data, use the following (the rest is aoutomatic):
       MoonSDK.CloseInGameStore(); // Execute when user closes the store
 
       
-**Levels progression events using GameAnalytics:**  
-
-
-      void MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents eventType, int levelIndex);
-      MoonSDK.TrackLevelEvents(MoonSDK.LevelEvents.Start, 1);
-
-
-**Note**: In this part it is crutial to check:  
+**Note**: In this part, it is crucial to check:  
      - **A.** Token to Adjust for EACH event  
-     - **B.**  No spaces before and after the token 
+     - **B.** No spaces before and after the token 
 </details>
 </details>
 
@@ -296,17 +266,15 @@ For the in game store data, use the following (the rest is aoutomatic):
 
 **We utilize Firebase for two primary purposes:**
 
-1. User Acquisition: To facilitate proper integration within Google platforms, event data needs to be stored in Firebase.
-2. A/B Testing via Remote Config: This powerful tool enables remote modification of parameters.
+1. User Acquisition: To ensure seamless integration with Google platforms, event data must be stored in Firebase.
+2. A/B Testing via Remote Config: This powerful tool allows for remote modification of parameters, enabling more effective experimentation.
 
 **Workflow:**
 
-1. A designated team member, typically the Product Manager, will initiate a Firebase project for your game (do not create one yourself, as it may lead to improper UA usage).
-2. You will receive configuration files (google-services.json for Android and GoogleService-Info.plist for iOS).
-3. Integrate these files into your Unity project following the instructions provided below.
+1. A designated team member, typically the Product Manager, will initiate a Firebase project for your game. Do not create one yourself, as it may result in improper user acquisition (UA) usage.
+2. You will receive the configuration files: google-services.json for Android and GoogleService-Info.plist for iOS.
+3. Integrate these files into your Unity project by following the instructions provided below.
 
-
-  
 ![UnityFirebase](images/AddingFirebaseToUnity.png)
 ![AssetesStreaming](images/AssetesStreamings.png)
 
@@ -327,29 +295,29 @@ Moon SDK by default uses some default remote config values:
 
 **Default values:**
 `int_grace_time`: 30 sec
-`Int_grace_level`: 1 level
+`int_grace_level`: 1 level
 `cooldown_between_INTs`: 20 sec
 `cooldown_after_RVs`: 20 sec
-`Show_int_if_fail`: False
-`INT_in_stage`: False
+`show_int_if_fail`: False
+`int_in_stage`: False
 
 Note that `int_grace_time`, `cooldown_between_INTs`, `cooldown_after_RVs` are managed automatically by Moon SDK and you don’t need to do anything with that, but the rest values you need to check before showing ads.
 
 
-       if(currentLevel > RemoteConfigValues.int_grace_level)
+        if(currentLevel > RemoteConfigValues.int_grace_level)
         {
             AdvertisementManager.ShowInterstitial();
         }
 
 
 
-      if(RemoteConfigValues.Show_int_if_fail == true)
+        if(RemoteConfigValues.Show_int_if_fail == true)
         {
             AdvertisementManager.ShowInterstitial();
         }
 
 
-      if(RemoteConfigValues.INT_in_stage == true)
+        if(RemoteConfigValues.INT_in_stage == true)
         {
             AdvertisementManager.ShowInterstitial();
         }
