@@ -3,6 +3,7 @@
 
 # Monetization Guide
 Welcome, developers, to the full version of the Moon SDK! 🌕
+And have a safe flight :)   
 
 Exciting news awaits as we transition to the Moonee SDK. If you were using the Moonlight SDK previously, kindly remove it and make the switch to this upgraded version.
 
