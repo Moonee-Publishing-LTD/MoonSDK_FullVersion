@@ -13,14 +13,13 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.3.9 (Released: 11/07/2024)
+#### Current Version: 1.4.0.3 (Released: 01/11/2024)
 
 In this version, we've made the following updates:
 
-- Send moves per level
-- Update adaptors (Including Facebook)
-- IAP catalog
-- Sending level events with one function to Adjust and Game Analytics 
+- Android CMP update
+- iOS ATT fix
+- Collecting additional data for analytics
 
 Note: The inspector is asking you for a sesson toke, please leave it empty for now.
 
@@ -61,7 +60,7 @@ Note: The inspector is asking you for a sesson toke, please leave it empty for n
 <details>
   <summary></summary>
   
-  - Unity Editor 2022 or higher (2022 LTS version)
+  - Unity Editor 2022 LTS version
   - Android:
     - Minimum SDK: Lollipop 5.0 (API 22)
     - Scripting backend: IL2CPP
@@ -81,7 +80,7 @@ Note: The inspector is asking you for a sesson toke, please leave it empty for n
 <details>
   <summary></summary>
 
-  The current version of the MOON SDK is version 1.3.9    
+  The current version of the MOON SDK is version 1.4.0.3    
   Slack bot is sending the link if you will type `FULL_SDK` 
   
 </details>
@@ -100,7 +99,7 @@ Note: The inspector is asking you for a sesson toke, please leave it empty for n
      ![MoonSDKScene](images/MoonSDKScene.png)
      
   4. Open MoonSDK settings and fill in all app keys for analytics and advertising services, Please ensure you add **all** of them and **copy/paste** them to the correct location in the inspector.
-  5. press Check and Sync Settings button  
+  5. Press Check and Sync Settings button  
      **Note:Make sure to copy/paste the tokens/ad IDs and not type them manually to avoid mistakes.**
     
      ![SyncSettings](images/SyncSettingsNew.png)
@@ -128,7 +127,7 @@ To use the advertisement manager add the following namespace:
       using `Moonee.MoonSDK.Internal.Advertisement;`
 
 
-  ### Rewarded video ads API:
+### Rewarded video ads API:
 <details>
   <summary>Expand</summary>
 
@@ -136,13 +135,6 @@ To use the advertisement manager add the following namespace:
 Use the following method to display a rewarded video in your game:
 
 ```csharp
-void AdvertisementManager.ShowRewardedAd
-(
-    [Action OnStartAdEvent = null],
-    [Action OnFinishAdEvent = null],
-    [Action OnFailAdEvent = null],
-    [Action OnFinishRewardedVideowWithSuccessEvent = null]
-)
 
 AdvertisementManager.ShowRewardedAd(
     () => 
@@ -169,21 +161,25 @@ AdvertisementManager.ShowRewardedAd(
 You can check if a rewarded video is ready using:
 
 ```csharp
-Bool AdvertisementManager.IsRewardedAdReady()
 AdvertisementManager.IsRewardedAdReady();
 ```
 
 ---
 
 #### Displaying High-Income Ads (Listeners events):
-Once a high-income ad is loaded and ready, use `AdvertisementManager.OnHighSegmentationRewardedVideoReadyEventHandler` to display it immediately for higher potential revenue.
+There are two important events in the AdvertisementManager class:
+
+AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler;
+AdvertisementManager.OnHighSegmentationRewardedVideoReadyEventHandler;
+
+These events are called as soon as the high-income ad is loaded and ready to display, use these events to trigger high-income ads as soon as you can in your game. Note that when AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler is called, the interstitial ad timer is reset, the ads are ready to be shown immediately.
 
 ---
 
 #### Key Notes:
 1. **Always include the Rewarded Video Name**: When calling `ShowRewardedAd()`, ensure that you provide the correct video name (e.g., `"RV_more_coins"`). Missing the video name can cause issues with tracking.
 2. **Handling interstitial ads**: If you notice that interstitial ads are being shown instead of rewarded videos, this is expected. The SDK might optimize revenue by choosing a more suitable ad format based on various factors.
-3. **For High-income ads**, ensure that `OnHighSegmentationRewardedVideoReadyEventHandler` is set up and used to display these ads quickly. Note the methos for interstitial high income is differnt than Rewarded Video.
+3. **For High-income ads**, ensure that `OnHighSegmentationRewardedVideoReadyEventHandler` is set up and used to display these ads quickly. Note the method for interstitial high income is differnt than Rewarded Video.
 
 
 </details>
@@ -196,16 +192,9 @@ Once a high-income ad is loaded and ready, use `AdvertisementManager.OnHighSegme
 Use the following method to display an interstitial in your game:
 
 ```csharp
-      float AdvertisementManager.InterstitialTimer {get; private set;}
-      double timeLeftForNextAd = AdvertisementManager.InterstitialTimer;
+       float AdvertisementManager.InterstitialTimer {get; private set;}
+       double timeLeftForNextAd = AdvertisementManager.InterstitialTimer;
 
-      void AdvertisementManager.ShowInterstitial
-       (
-         [Action OnStartAdEvent = null],
-         [Action OnFinishAdEvent = null],
-         [Action OnFailAdEvent = null]
-       )
-       
        AdvertisementManager.ShowInterstitial(
         () =>
         {
@@ -224,15 +213,10 @@ Use the following method to display an interstitial in your game:
 You can check if an interstitial is ready using:
 
 ```csharp
-        Bool AdvertisementManager.IsInterstitialdAdReady()
         AdvertisementManager.IsInterstitialdAdReady();
 ```
 ---
 
-#### Displaying High-Income Ads (Listeners events):
-Once a high-income ad is loaded and ready, use `AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler` to display it immediately for higher potential revenue.
-
----
 
 #### Key Notes:
 1. For High-income ads, ensure that `AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler` is set up and used to display these ads quickly.
@@ -281,10 +265,11 @@ The image below represents the event flow:
 #### **`LevelDataStartEvent`**  
 This event is sent at the beginning of a level and includes data on the engagement time between levels. The following parameters are included:
 
-1. **`coinsAmount`** – The player's current balance of the main currency.  
+1. **`levelNumber`** - Indicates the current level number
+2. **`coinsAmount`** – The player's current balance of the main currency.  
    - Example: If a player ended the last level with 30 coins and didn't spend any, send `30`. If the player had 30 coins but spent 15 in the store, send `15`. If I played level 1, during the level got 10 and lost 5. In the complete screen I was given 2 more. you should send: 10-5+2 = 7. In Level 1, if the player starts with 0 coins, send `0`.
 
-2. **`purchaseIDs`** – The IDs of in-app purchases made before starting this level, since the last time this event was sent.
+3. **`purchaseIDs`** – The IDs of in-app purchases made before starting this level, since the last time this event was sent.
 
 Use the following function to send this event:
 
@@ -297,29 +282,17 @@ MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount, purchaseIDs);
 #### **`LevelDataCompleteEvent`**  
 This event is sent at the end of a level and contains the following information:
 
-1. **`LevelStatus`** – The current status of the level:
-   - `"start"` – When the level begins.
-   - `"fail"` – If the player fails the level.
-   - `"complete"` – If the player completes the level.
-   
-2. **`levelIndex`** – The index of the level. Send this as an integer (e.g., `1`), which the SDK will convert to Game Analytics format (e.g., `0001`). Make sure the levels start from `1` (not `0`).
-
-3. **`LevelResult`** – The result of the level, either `"win"` or `"fail"`.
-
-4. **`isContinue`** – A boolean indicating whether the player is continuing from where they left off (`true`) or starting fresh (`false`). For idle or revive mechanics:
-   - If a player enters the level for the first time, set `isContinue = false`.
-   - If a player restarts the level or resumes from saved progress, set `isContinue = true`.
-   - If your game doesn't have this feature, set this to `false` by default.
-
-5. **`coinsAmount`** – The player's balance of the main currency at the end of the level.  
-   - Example: If the player started the level with 100 coins and earned 50 during the level, send `150`. If the player started with 900 coins and earned 15, send `915`. Make sure to send the event *after* updating the player's new balance.
-
-7. **`movesAmount`** – The total number of moves the player made during the level.
+1. **`levelNumber`** - Indicates the current level number
+2. **`result`** - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
+3. **`isContinueLevel`** - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive option. If the game doesn't have these features, it should be set to false by default.
+4. **`coinsAmount`** - Represents the amount of soft currency when the level is finished
+5. **`moves`** - Represents the number of moves made during the level
+6. **`customParameters`** - This is a Dictionary<string, string> where you can track your own custom parameters. The key represents the parameter name, and the value represents the actual value of the parameter
 
 Use the following function to send this event:
 
 ```csharp
-MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelIndex, LevelResult.win, isContinue, coinsAmount, movesAmount);
+MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelNumber, LevelResult.win, isContinueLevel, customParamsDictionary);
 ```
 
 ---
@@ -359,24 +332,15 @@ Please ensure that the event is triggered from every available location where th
 If you don't have an in app in the game, send `string.Empty`
 
 In-app purchase (IAP) Event contains the following parameters:
-1. `iAPType` - Refer to the different types of in-app purchaseS:
+1. `purchaseEventArgs` - 
+2. `iAPType` - Refer to the different types of in-app purchaseS:
     A. `product` - A one-time purchase.
-    B. `Subscription` - A product that allows users to purchase content for a defined period. 
+    B. `Subscription` - A product that allows users to purchase content for a defined period.   
 3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
 
 After each successful purchase you need to send event to adjust:
 
-
-
-      public static async Task MoonSDK.TrackAdjustRevenueEventAsync(PurchaseEventArgs e, iAPType iAPType, string levelNumber = "default")
-      await  MoonSDK.TrackAdjustRevenueEventAsync(product, iAPType.product, "0001");
-
-
-
-Example:
-
-
-      System.Threading.Tasks.Task task = MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, $"{LevelNumber}");
+      MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, "4");
 
 ![obfuscation](images/obfuscation.png)
 
@@ -430,18 +394,20 @@ Exsample:
 **Firebase Remote Config** 
 
 Moon SDK by default uses some default remote config values:
-1. `int_sessions_grace`: Interstitials sessions grace - sessions grace untill interstitial.
-2. `cooldown_between_INTs`: Cooldown Between Interstitials -  timer (in seconds) for spaces between INTs.
-3. `cooldown_after_RVs`: Cooldown After Rewarded Videos- time (in seconds) for INT AFTER watching a Rewarded video.( Replace cooldown_between_int ).
-4. `show_int_if_fail`: Show Interstitial If Fail 	
+1. `int_grace_time`: Interstitials time grace - time grace untill first interstitial.
+2. `int_grace_level`: Interstitials level grace - level grace untill first interstitial.
+3. `cooldown_between_INTs`: Cooldown Between Interstitials -  timer (in seconds) for spaces between INTs.
+4. `cooldown_after_RVs`: Cooldown After Rewarded Videos- time (in seconds) for INT AFTER watching a Rewarded video.( Replace cooldown_between_int ).
+5. `show_int_if_fail`: Show Interstitial If Fail 	
 `True`: player gets ads after each level, regardless of success status,
 `False`:  player gets ads after success levels only.
-5. `int_in_stage`: Interstitials In Stage,
+6. `int_in_stage`: Interstitials In Stage,
 `True`: player gets ads during stages
 `False`: player gets ads after stages only
 
 **Default values:**
-`int_sessions_grace`: 0 sec
+`int_grace_time`: 0 sec
+`int_grace_level`" 1
 `cooldown_between_INTs`: 20 sec
 `cooldown_after_RVs`: 20 sec
 `show_int_if_fail`: False
@@ -450,20 +416,20 @@ Moon SDK by default uses some default remote config values:
 Note that `int_sessions_grace`, `cooldown_between_INTs`, `cooldown_after_RVs` are managed automatically by Moon SDK and you don’t need to do anything with that, but the rest values you need to check before showing ads.
 
 
-       if(currentLevel > RemoteConfigValues.int_grace_level)
+        if(currentLevel > RemoteConfigValues.int_grace_level)
         {
             AdvertisementManager.ShowInterstitial();
         }
 
 
 
-      if(RemoteConfigValues.Show_int_if_fail == true)
+       if(RemoteConfigValues.Show_int_if_fail == true)
         {
             AdvertisementManager.ShowInterstitial();
         }
 
 
-      if(RemoteConfigValues.INT_in_stage == true)
+       if(RemoteConfigValues.INT_in_stage == true)
         {
             AdvertisementManager.ShowInterstitial();
         }
