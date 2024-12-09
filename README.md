@@ -395,7 +395,7 @@ After each successful purchase you need to send event to adjust:
 <details>
   <summary></summary>
 
-  These are automatocally collected events by the MOON SDK, you don't need to use any function.
+  These are automatically collected events by the MOON SDK, you don't need to use any function.
   The only thing that you should do is use the event token in the right place in the inspector. 
 </details>
 
