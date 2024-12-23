@@ -147,7 +147,7 @@ AdvertisementManager.ShowRewardedAd(
     },
     () =>
     {
-        // Ad fail logic
+        // Ad fail logic - show pop up that ad is not ready. 
     },
     () =>
     {
@@ -157,12 +157,6 @@ AdvertisementManager.ShowRewardedAd(
 );
 ```
 
-#### Checking Ad Readiness:
-You can check if a rewarded video is ready using:
-
-```csharp
-AdvertisementManager.IsRewardedAdReady();
-```
 
 ---
 
@@ -206,14 +200,8 @@ Use the following method to display an interstitial in your game:
         },
         () =>
         {
-            //Ad fail logic
+            //Ad fail logic - show pop up that ad is not ready. 
         });
-```
-#### Checking Ad Readiness:
-You can check if an interstitial is ready using:
-
-```csharp
-        AdvertisementManager.IsInterstitialdAdReady();
 ```
 ---
 
