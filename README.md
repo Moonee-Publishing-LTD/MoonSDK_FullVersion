@@ -13,15 +13,16 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.0.3 (Released: 01/11/2024)
+#### Current Version: 1.4.1(Released: 09/12/2024)
 
 In this version, we've made the following updates:
 
-- Android CMP update
-- iOS ATT fix
-- Collecting additional data for analytics
+- iOS CMP update
+- Collecting additional data for analytics: produce-consume data in level events
+- Added listeners events for high revenue ads
+- New event - 'segmentation' that has a new token - on function usege is needed, automatically collected by the SDK.
 
-Note: The inspector is asking you for a sesson toke, please leave it empty for now.
+Note: The inspector is asking you for a session toke, please leave it empty for now.
 
 # Table of Contents
 <details>
@@ -38,7 +39,8 @@ Note: The inspector is asking you for a sesson toke, please leave it empty for n
 6. [Events](#events)  
   A. [Progression events](#progression-events)  
   B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-  C. [Custom Events](#custom-events)   
+  C. [Segmentation Events](#segmentation-events)  
+  D. [Custom Events](#custom-events)  
 7. [Firebase Configuration](#firebase-configuration)
 8. [CMP - GDPR Consent](#cmp---gdpr-consent)
 9. [In-Game Fonts](#in-game-fonts)
@@ -164,7 +166,9 @@ AdvertisementManager.ShowRewardedAd(
 There are two important events in the AdvertisementManager class:
 
 AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler;
+AdvertisementManager.OnMediumSegmentationInterstitialReadyEventHandler;
 AdvertisementManager.OnHighSegmentationRewardedVideoReadyEventHandler;
+AdvertisementManager.OnMediumSegmentationRewardedVideoReadyEventHandler;
 
 These events are called as soon as the high-income ad is loaded and ready to display, use these events to trigger high-income ads as soon as you can in your game. Note that when AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler is called, the interstitial ad timer is reset, the ads are ready to be shown immediately.
 
@@ -230,7 +234,9 @@ Use the following method to display an interstitial in your game:
   
 A. [Progression events](#progression-events)  
 B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-C. [Custom Events](#custom-events)   
+C. [Segmentation Events](#segmentation-events)  
+D. [Custom Events](#custom-events) 
+
 
 ---
 
@@ -250,19 +256,29 @@ The `LevelDataStartEvent` includes information about the time spent between leve
 The image below represents the event flow:  
 ![levels_order](images/levels_order.png)
 
+
 #### **`LevelDataStartEvent`**  
 This event is sent at the beginning of a level and includes data on the engagement time between levels. The following parameters are included:
 
-1. **`levelNumber`** - Indicates the current level number
-2. **`coinsAmount`** – The player's current balance of the main currency.  
-   - Example: If a player ended the last level with 30 coins and didn't spend any, send `30`. If the player had 30 coins but spent 15 in the store, send `15`. If I played level 1, during the level got 10 and lost 5. In the complete screen I was given 2 more. you should send: 10-5+2 = 7. In Level 1, if the player starts with 0 coins, send `0`.
+1. **`levelNumber`** - Indicates the current level number.  
+   - **Example:** If the player is starting level 3, send `3`.
 
-3. **`purchaseIDs`** – The IDs of in-app purchases made before starting this level, since the last time this event was sent.
+2. **`coinsAmount`** – The player's current **balance** of the main currency.  
+   - **Example:** If a player ended the last level with 30 coins and didn't spend any, send `30`. If the player had 30 coins but spent 15 in the store, send `15`.  
+   - **Detailed scenario:** If I played level 1, during the level got 10 and lost 5. In the complete screen, I was given 2 more coins. You should send: `10-5+2 = 7`. If the player starts level 1 with 0 coins, send `0`.
+
+3. **`producedCoinsAmount`** – The total number of coins earned during the **previous level** or **between** levels.  
+   - **Example:** If the player earned 20 coins for completing a task and 10 coins from a bonus reward, send `30`. If no coins were produced, send `0`.
+
+4. **`consumedCoinsAmount`** – The total number of coins spent during the **previous level** or **between** levels.  
+   - **Example:** If the player spent 15 coins on an upgrade and 5 coins on a power-up, send `20`. If no coins were spent, send `0`. 
+
+5. **`purchaseIDs`** – The IDs of in-app purchases made before starting this level, since the last time this event was sent.
 
 Use the following function to send this event:
 
 ```csharp
-MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount, purchaseIDs);
+MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount,producedCoinsAmount,consumedCoinsAmount, purchaseIDs);
 ```
 
 ---
@@ -270,17 +286,44 @@ MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount, purchaseIDs);
 #### **`LevelDataCompleteEvent`**  
 This event is sent at the end of a level and contains the following information:
 
-1. **`levelNumber`** - Indicates the current level number
-2. **`result`** - Represents the outcome of the level, which could be "win" if the player successfully completes it or "fail" if the player fails to complete it.
-3. **`isContinueLevel`** - A boolean argument that indicates whether the player is continuing the level from where they left off (true) or starting it from the beginning (false). This is particularly useful for long idle levels or when there's a revive option. If the game doesn't have these features, it should be set to false by default.
-4. **`coinsAmount`** - Represents the amount of soft currency when the level is finished
-5. **`moves`** - Represents the number of moves made during the level
-6. **`customParameters`** - This is a Dictionary<string, string> where you can track your own custom parameters. The key represents the parameter name, and the value represents the actual value of the parameter
+1. **`levelNumber`** - Indicates the current level number.  
+   - **Example:** If the player finishes level 5, send `5`.
+
+2. **`result`** - Represents the outcome of the level.  
+   - **Example:** Send `"win"` if the player completes the level successfully, or `"fail"` if they fail to complete it.
+
+3. **`isContinueLevel`** - A boolean indicating whether the player continued the level from where they left off (`true`) or started it from the beginning (`false`).  
+   - **Example:** If the player used a revive to continue the level, send `true`. If the level was played from the start, send `false`. For games without such features, this should default to `false`.
+
+4. **`coinsAmount`** – Represents the player's current soft currency balance when the level ends.  
+   - **Example:** If the player started with 10 coins, earned 20 coins, and spent 5 coins during the level, send `25` (`10 + 20 - 5`). If the player ends the level with no currency, send `0`.
+
+5. **`producedCoinsAmount`** – The total number of coins earned during the level.  
+   - **Example:** If the player earned 10 coins from rewards and 5 coins from bonuses, send `15`. If no coins were earned, send `0`.
+
+6. **`consumedCoinsAmount`** – The total number of coins spent during the level.  
+   - **Example:** If the player spent 5 coins on a power-up and 3 coins on an in-game item, send `8`. If no coins were spent, send `0`.
+
+7. **`moves`** – Represents the number of moves made by the player during the level.  
+   - **Example:** If the player made 25 moves before completing or failing the level, send `25`. If moves are not tracked in your game, this parameter can be omitted or set to `0`. 
+
+8. **`customParameters`** – A `Dictionary<string, string>` where custom parameters can be tracked.  
+   - **Key:** Represents the name of the custom parameter.  
+   - **Value:** Represents the value of the parameter.  
+   - **Example:** 
+     ```json
+     {
+       "difficulty": "hard",
+       "timeOfDay": "evening",
+       "powerUpsUsed": "3"
+     }
+     ``` 
+   Use this field to include additional game-specific data, such as the level's difficulty, the time of day the level was played, or any other relevant information. If no custom parameters are needed, send an empty dictionary. 
 
 Use the following function to send this event:
 
 ```csharp
-MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelNumber, LevelResult.win, isContinueLevel, customParamsDictionary);
+MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelNumber, LevelResult.win, isContinueLevel, coinsAmount, producedCoinsAmount,consumedCoinsAmount, moves, customParamsDictionary);
 ```
 
 ---
@@ -332,6 +375,16 @@ After each successful purchase you need to send event to adjust:
 
 ![obfuscation](images/obfuscation.png)
 
+</details>
+
+---
+
+### Segmentation Events
+<details>
+  <summary></summary>
+
+  These are automatically collected events by the MOON SDK, you don't need to use any function.
+  The only thing that you should do is use the event token in the right place in the inspector. 
 </details>
 
 ---
