@@ -13,7 +13,7 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.1(Released: 09/12/2024)
+#### Current Version: 1.4.1(Released: 23/12/2024)
 
 In this version, we've made the following updates:
 
