@@ -22,7 +22,7 @@ In this version, we've made the following updates:
 - Added listeners events for high revenue ads
 - New event - 'segmentation' that has a new token - on function usege is needed, automatically collected by the SDK.
 
-Note: The inspector is asking you for a session toke, please leave it empty for now.
+Note: The inspector is asking you for a session token, please leave it empty for now.
 
 # Table of Contents
 <details>
