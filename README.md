@@ -372,8 +372,7 @@ To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you'v
 2. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
 3. If you don't have an in app in the game, send `string.Empty`
 4. For IAP validation: Use the IAP catalog from Unity, and set correct ID (like on a store) also fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
-![overrides](images/![overrides.png]()
-)
+![overrides](images/overrides.png)
 5. After each successful purchase you need to send event to adjust:  
 
       ```MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, "4");```
