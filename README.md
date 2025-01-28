@@ -91,17 +91,21 @@ Note: The inspector is asking you for a session token, please leave it empty for
 <details>
   <summary></summary>
 
-  1. Import MoonSDK.unitypackage into your unity project.
+  1. Import MoonSDK.unitypackage into your unity project.<br>
+   **Note: For initial test you only need to import these monetization adapters under "Mediated Networks":
+     Mintegral,Facebook,ironSource,Unity Ads,Bidmachine,inMobi,Verve,Liftoff,Pangle,Verve Group,Smaato,DT Exchange**
+     
+  3. Please note, that our SDK uses some iAP features, so iAP package should be installed from the package manager
   
-  2. Please note, that our SDK uses some iAP features, so iAP package should be installed from the package manager
-  
-  3. The MoonSDKScene must be the first in the list in the build settings, after initialization it will load the next scene in the list (with index 1).
+  4. The MoonSDKScene must be the first in the list in the build settings, after initialization it will load the next scene in the list (with index 1).
 
      ![MoonSDKScene](images/MoonSDKScene.png)
      
-  4. Open MoonSDK settings and fill in all app keys for analytics and advertising services, Please ensure you add **all** of them and **copy/paste** them to the correct location in the inspector.
-  5. Press Check and Sync Settings button  
+  5. Open MoonSDK settings and fill in all app keys for analytics and advertising services, Please ensure you add **all** of them and **copy/paste** them to the correct location in the inspector.
+  6. Press Check and Sync Settings button
+     
      **Note:Make sure to copy/paste the tokens/ad IDs and not type them manually to avoid mistakes.**
+     
     
      ![SyncSettings](images/SyncSettingsNew.png)
 
@@ -162,7 +166,7 @@ AdvertisementManager.ShowRewardedAd(
 
 ---
 
-#### Displaying High-Income Ads (Listeners events):
+#### (Advanced - not for initial test) Displaying High-Income Ads (Listeners events):
 There are two important events in the AdvertisementManager class:
 
 AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler;
@@ -177,7 +181,7 @@ These events are called as soon as the high-income ad is loaded and ready to dis
 #### Key Notes:
 1. **Always include the Rewarded Video Name**: When calling `ShowRewardedAd()`, ensure that you provide the correct video name (e.g., `"RV_more_coins"`). Missing the video name can cause issues with tracking.
 2. **Handling interstitial ads**: If you notice that interstitial ads are being shown instead of rewarded videos, this is expected. The SDK might optimize revenue by choosing a more suitable ad format based on various factors.
-3. **For High-income ads**, ensure that `OnHighSegmentationRewardedVideoReadyEventHandler` is set up and used to display these ads quickly. Note the method for interstitial high income is differnt than Rewarded Video.
+3. **(Advanced - not for initial test) For High-income ads**, ensure that `OnHighSegmentationRewardedVideoReadyEventHandler` is set up and used to display these ads quickly. Note the method for interstitial high income is differnt than Rewarded Video.
 
 
 </details>
@@ -328,7 +332,7 @@ MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelNumber, LevelResul
 
 ---
 
-#### **In-Game Store**  
+#### ** (Advanced - not for initial test) In-Game Store**  
 For tracking player interactions with the in-game store, use the following functions:
 
 ```csharp
@@ -359,13 +363,20 @@ Remember to add every Rewarded Video used in the game. Append `"rewardedVideoNam
 
 In-app purchase (IAP) Event contains the following parameters:  
 1. `purchaseEventArgs`   
-2. `iAPType` - Refer to the different types of in-app purchaseS:  
-    A. `product` - A one-time purchase.  
+2. `iAPType` - Refer to the different types of in-app purchases:  
+    A. `product` - consumable/non-consumable product single purchase.  
     B. `Subscription` - A product that allows users to purchase content for a defined period.     
 3. `levelNunmber` -  Specifies the level where the in-app purchase was made. 
 
 
 To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you've configured the Adjust app token and the IAP revenue event token within the Moon SDK settings.  
+
+In order to validate purchases we need app google public key:
+1. Log into the google play console: <a href="[url](https://play.google.com/console/u/0/developers )">Google Play Console</a>
+2. Select your app from the list of apps
+3. In the left panel click on "Monetize with play" -> "Monetization setup"
+4. Scroll down the page and see the key under "Licensing"
+   
 1. Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.
 ![obfuscation](images/obfuscation.png)
 2. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
@@ -393,7 +404,7 @@ To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you'v
 
 ---
 
-### Custom Events
+### (Advanced - not for initial test) Custom Events
 <details>
   <summary></summary>
 The following is only for advance games, that have a need for custom events:  
@@ -528,7 +539,7 @@ Check if the user is in the GDPR country
         
 </details>  
 
-## In-Game Fonts
+## (Advanced - not for initial test) In-Game Fonts
 <details>
   <summary></summary>  
 In terms of in-game fonts, they must be official fonts from Google Fonts or Liberation Sans from Unity. Follow these steps to ensure compliance with font licensing:
@@ -550,7 +561,7 @@ By adhering to these guidelines, you ensure that your game uses licensed fonts r
 
 </details>
 
-## Rate Us View
+## (Advanced - not for initial test) Rate Us View
 <details>
   <summary></summary>
   
