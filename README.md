@@ -93,7 +93,7 @@ Note: The inspector is asking you for a session token, please leave it empty for
 
   1. Import MoonSDK.unitypackage into your unity project.<br>
    **Note: For initial test you only need to import these monetization adapters under "Mediated Networks":
-     Mintegral,Facebook,ironSource,Unity Ads,Bidmachine,inMobi,Verve,Liftoff,Pangle,Verve Group,Smaato,DT Exchange**
+     Mintegral, Facebook, ironSource, Unity Ads, BidMachine, AdMob, inMobi, Verve, Liftoff, Pangle, Smaato, DT Exchange, Moloco**
      
   3. Please note, that our SDK uses some iAP features, so iAP package should be installed from the package manager
   
