@@ -64,7 +64,7 @@ Note: The inspector is asking you for a session token, please leave it empty for
   
   - Unity Editor 2022 LTS version
   - Android:
-    - Minimum SDK: Lollipop 5.0 (API 22)
+    - Minimum SDK: Nougat 7.1 (API 25)
     - Scripting backend: IL2CPP
   - iOS:
     - Target minimum iOS Version: 13.0
