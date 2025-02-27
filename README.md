@@ -13,10 +13,13 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.1(Released: 23/12/2024)
+#### Current Version: 1.4.2.1(Released: 27/02/2025)
 
 In this version, we've made the following updates:
 
+- Custom parameter in level start
+- Moloco adaptor fix
+- 
 - iOS CMP update
 - Collecting additional data for analytics: produce-consume data in level events
 - Added listeners events for high revenue ads
