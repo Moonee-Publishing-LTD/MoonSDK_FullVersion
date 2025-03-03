@@ -17,16 +17,12 @@ Let's embark on this enhanced development experience together! 🚀
 
 In this version, we've made the following updates:
 
-- Custom parameter in level start
 - Moloco adaptor fix
-- 
-- iOS CMP update
-- Collecting additional data for analytics: produce-consume data in level events
-- Added listeners events for high revenue ads
-- New event - 'segmentation' that has a new token - on function usege is needed, automatically collected by the SDK.
-
-Note: The inspector is asking you for a session token, please leave it empty for now.
-
+- Custom paramter at level start
+- Adjust SDK V5 include:
+  - Signature
+  - Purchase verification
+  
 # Table of Contents
 <details>
   <summary></summary>
@@ -282,10 +278,23 @@ This event is sent at the beginning of a level and includes data on the engageme
 
 5. **`purchaseIDs`** – The IDs of in-app purchases made before starting this level, since the last time this event was sent.
 
+6. **`customParameters`** – A `Dictionary<string, string>` where custom parameters can be tracked.  
+   - **Key:** Represents the name of the custom parameter.  
+   - **Value:** Represents the value of the parameter.  
+   - **Example:** 
+     ```json
+     {
+       "difficulty": "hard",
+       "timeOfDay": "evening",
+       "powerUpsUsed": "3"
+     }
+     ``` 
+   Use this field to include additional game-specific data, such as the level's difficulty, the time of day the level was played, or any other relevant information. If no custom parameters are needed, send an empty dictionary. 
+
 Use the following function to send this event:
 
 ```csharp
-MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount,producedCoinsAmount,consumedCoinsAmount, purchaseIDs);
+MoonSDK.SendLevelDataStartEvent(levelIndex, coinsAmount,producedCoinsAmount,consumedCoinsAmount, purchaseIDs, customParamsDictionary);
 ```
 
 ---
