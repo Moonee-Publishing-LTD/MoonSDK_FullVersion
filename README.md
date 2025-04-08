@@ -28,25 +28,25 @@ In this version, we've made the following updates:
   <summary></summary>
 
 1. [System Requirements](#system-requirements)
-2. [Downloading MOON SDK](#downloading-moon-sdk)
-3. [Setting Up Moon SDK](#setting-up-moon-sdk)
-4. [Initialization](#initialization)
-5. [Displaying Ads](#displaying-ads)  
+2. [Platform Settings](#platform-settings)  
+    A. [Facebook](#facebook)  
+    B. [Game Analytics](#game-analytics)  
+3. [Downloading MOON SDK](#downloading-moon-sdk)
+4. [Setting Up Moon SDK](#setting-up-moon-sdk)
+5. [Initialization](#initialization)
+6. [Displaying Ads](#displaying-ads)  
    A. [Rewarded Video Ads](#rewarded-video-ads-api)  
    B. [Interstitial Ads](#interstitial-ads-api)  
    C. [Banner Ads](#banner-ads-api)
-6. [Events](#events)  
+7. [Events](#events)  
   A. [Progression events](#progression-events)  
   B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
   C. [Segmentation Events](#segmentation-events)  
   D. [Custom Events](#custom-events)  
-7. [Firebase Configuration](#firebase-configuration)
-8. [CMP - GDPR Consent](#cmp---gdpr-consent)
-9. [In-Game Fonts](#in-game-fonts)
-10. [Rate Us View](#rate-us-view)
-11. [Platform Configuration - If Not Yet Added](#platform-configuration---if-not-yet-added)  
-    A. [Facebook](#facebook)  
-    B. [Game Analytics](#game-analytics)
+8. [Firebase Configuration](#firebase-configuration)
+9. [CMP - GDPR Consent](#cmp---gdpr-consent)
+10. [In-Game Fonts](#in-game-fonts)
+11. [Rate Us View](#rate-us-view)
 12. [DATA Safety](#data-safety)  
       A. [Android](#android)  
       B. [iOS](#ios)  
@@ -76,6 +76,105 @@ In this version, we've made the following updates:
       
 </details>
 
+## Platform Settings
+
+  ### Facebook
+  <details>
+    <summary>Expand</summary>
+
+#### 1: Sign in the [Facebook UI](https://developers.facebook.com/apps)
+
+#### 2: Create an app
+Press "Create app"  
+![FB_CreateApp](images/FB_CreateApp.png)    
+The following manual by Meta explains how to create an app: [Manual](https://developers.facebook.com/docs/development/create-an-app/)
+
+#### 3: Use cases:
+When asked "What do you want your app to do?" Choose "other"  
+![FB_Other](images/FB_Other.png)  
+
+#### 4: App details: 
+Choose "Consumer" 
+![FB_Consumer](images/FB_Consumer.png)
+
+#### 5: Create a valid privacy policy and User data deletion
+
+  A. Create Privacy policy on: [this link](https://app-privacy-policy-generator.firebaseapp.com/)  
+  B. After creating, download it and open it on Google Docs.  
+  C. Under "File" choose "Publish to the web" and it will create you a Privacy Policy link.  
+  D. Go to "App Setting / Basic" 
+  D. Insert the created link on Both privacy policy and User data deletion sections, and choose the needed Category and Sub-Category (Hyper Casual, Hybrid etc.).
+![FB_Privacy](images/FB_Privacy.png)
+
+#### 6: Choose and add your platform
+
+  A. Go to "App Setting / Basic"
+  B. Scroll to the bottom 
+  C. See "+ Add Platform"
+  D. Android: fill the package name (it’s the bundle),
+  E. iOS: fill App’s ID and Bundle ID.  
+  F. Other sections or to confirm ownership are not mandatory so don’t worry about it!  
+  G. Click “Save Changes”.
+   ![FBaddPlatform](images/FBaddPlatform.png)
+   ![FB_ChooseAndroid](images/FB_ChooseAndroid.png)
+   ![FB_ChoosGP](images/FB_ChoosGP.png)
+
+#### 7: Activate your app
+
+Make sure to set the status on the first row to "Live".
+![live app](images/liveAppMeta.png)
+
+#### 8: Add Moonee’s Ad Account ID
+
+For us to be able to test your game, we need to connect it to our Ad Account:  
+  a. Go to Settings -> Advanced and fill the needed info:  
+  b. Scroll down to the section “Advertising Accounts” and insert Moonee’s Ad Account ID:`267507499172466`.
+![account](images/AccountID.png)
+
+#### 9: Verify data
+
+You can download + open the app and check on FB Developer main dashboard if you’re seeing data of last date installs.
+
+#### 10: Share IDs in the Slack Channel:
+1. Log into the [Meta developer portal.](https://developers.facebook.com/) 
+2. Navigate to My Apps in the top right corner.
+3. Select the app for which you would like to access your decryption key.
+4. Select Settings > Basic.
+5. Scroll to the Android section.
+6. Look for Install Referrer Decryption Key under the Google Play header.
+7. Copy the Install Referrer Decryption Key and the Facebook App ID and share them in the slack channel
+![FB_for_devs_decryption_key](images/FB_for_devs_decryption_key.png)
+
+#### 11: Add Moonee members to the meta app:
+Accounts:  
+1. ruth.adler.2021 OR ruth.a@moonee.io   
+2. facundourq.m OR facundo.u@moonee.io  
+
+![FB_add_users](images/FB_add_users.png)
+
+
+  </details>
+
+  ### Game Analytics 
+  <details>
+    <summary>Expand</summary>
+    
+Game Analytics data serves as a crucial tool for determining retention rates and playtime. Progression events are instrumental in this determination, operating within the backend infrastructure. Currently, it's imperative that every level (or minute, particularly in Idle games) incorporates Game Analytics events and Adjust events for optimal tracking and analysis.
+The SDK is sending the events automatically to GA from progression events part. If for some reason this is not working, let us know. 
+This section is here for cases where you are not using the events methods.
+
+1. Create a Game analytics account and asset using this [link](https://tool.gameanalytics.com/login?redirect=%252F).
+2. If your game is level-based, make sure to have the events:
+   - Start
+   - Complete
+   - Fail
+3. Make sure to have the level events naming in the format:
+   - “Level0001”
+   - “Level0002”  
+   (Make sure to start from level 0001 and not from 0000)
+4. Grant us Admin access to the app on Game Analytics: 
+   - Settings -> Users -> Invite users -> for this user erez@moonee.io
+  </details>
 
 ## Downloading MOON SDK
 <details>
@@ -585,79 +684,6 @@ The SDK rate us logic is just a default one, You can overwrite it with your own 
      
 </details>
 
- ## Platform Configuration - If Not Yet Added
- 
- <details>
-  <summary></summary>
-   
-A. [Facebook](#facebook)  
-B. [Game Analytics](#game-analytics)
-
-### Facebook
- <details>
-  <summary></summary>
-   
-#### 1: Creating a game in the [Facebook UI](https://developers.facebook.com/apps)
-
-#### 2: Create an app
-
-The following manual by Meta explains how to create an app: [Manual](https://developers.facebook.com/docs/development/create-an-app/)
-
-When you need to choose the type of the app, choose "Other" > "Gaming app".
-
-#### 3: Go to Settings > Basic and fill the needed info
-
-#### 4: Create a valid privacy policy and User data deletion
-
-  A. Create Privacy policy on: [this link](https://app-privacy-policy-generator.firebaseapp.com/)  
-  B. After creating, download it and open it on Google Docs.  
-  C. Under "File" choose "Publish to the web" and it will create you a Privacy Policy link.  
-  D. Insert the created link on Both privacy policy and User data deletion sections, and choose the needed Category and Sub-Category (Hyper Casual, Hybrid etc.).
-![Basic](images/facebookBasic.png)
-#### 5: Choose and add your platform
-
-  A. Android: fill the package name (it’s the bundle), and on iOS fill App’s ID and Bundle ID.  
-  B. Other sections or to confirm ownership are not mandatory so don’t worry about it!  
-  C. Click “Save Changes”.
-  ![Android](images/Android.png)
-
-#### 6: Activate your app
-
-Make sure to set the status on the first row to "Live".
-![live app](images/liveAppMeta.png)
-
-#### 7: Add Moonee’s Ad Account ID
-
-For us to be able to test your game, we need to connect it to our Ad Account:  
-  a. Go to Settings -> Advanced and fill the needed info:  
-  b. Scroll down to the section “Advertising Accounts” and insert Moonee’s Ad Account ID:`267507499172466`.
-![account](images/AccountID.png)
-#### 8: Verify data
-
-You can download + open the app and check on FB Developer main dashboard if you’re seeing data of last date installs.
-
-#### 9: Share in the Slack channel your FB App ID.
-
-  </details>  
-
-### Game Analytics
- <details>
-  <summary></summary>
-
-1. Create a Game analytics account and asset using this [link](https://tool.gameanalytics.com/login?redirect=%252F).
-2. If your game is level-based, make sure to have the events:
-   - `Start`
-   - `Complete`
-   - `Fail`
-3. Make sure to have the level events naming in the format:
-   - `Level0001`
-   - `Level0002`
-   (Make sure to start from level 0001 and not from 0000)
-4. Grant us Admin access to the app on Game Analytics: 
-   - Settings -> Users -> Invite users -> for this user erez@moonee.io
-  </details>
-
- </details>
 
 ## Testing
 <details>
