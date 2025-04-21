@@ -264,7 +264,8 @@ AdvertisementManager.ShowRewardedAd(
 
 ---
 
-#### (Advanced - not for initial test) Displaying High-Income Ads (Listeners events):
+####  Displaying High-Income Ads (Listeners events):
+##### Advanced - not for initial test
 There are two important events in the AdvertisementManager class:
 
 AdvertisementManager.OnHighSegmentationInterstitialReadyEventHandler;
@@ -331,17 +332,17 @@ Use the following method to display an interstitial in your game:
 </details>
 
 ## Events
-<details>
-  <summary></summary>
-  
+
+
 A. [Progression events](#progression-events)  
 B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
 C. [Segmentation Events](#segmentation-events)  
 D. [Custom Events](#custom-events) 
 
-
----
-
+<details>
+  <summary></summary>
+  
+--- 
 ### Progression Events
 
 <details>
@@ -443,7 +444,8 @@ MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelNumber, LevelResul
 
 ---
 
-#### ** (Advanced - not for initial test) In-Game Store**  
+#### **In-Game Store**  
+##### #### Advanced - not for initial test
 For tracking player interactions with the in-game store, use the following functions:
 
 ```csharp
@@ -515,7 +517,8 @@ In order to validate purchases we need app google public key:
 
 ---
 
-### (Advanced - not for initial test) Custom Events
+### Custom Events
+#### Advanced - not for initial test
 <details>
   <summary></summary>
 The following is only for advance games, that have a need for custom events:  
@@ -650,7 +653,8 @@ Check if the user is in the GDPR country
         
 </details>  
 
-## (Advanced - not for initial test) In-Game Fonts
+## In-Game Fonts
+#### Advanced - not for initial test
 <details>
   <summary></summary>  
 In terms of in-game fonts, they must be official fonts from Google Fonts or Liberation Sans from Unity. Follow these steps to ensure compliance with font licensing:
@@ -672,7 +676,8 @@ By adhering to these guidelines, you ensure that your game uses licensed fonts r
 
 </details>
 
-## (Advanced - not for initial test) Rate Us View
+## Rate Us View
+### Advanced - not for initial test
 <details>
   <summary></summary>
   
