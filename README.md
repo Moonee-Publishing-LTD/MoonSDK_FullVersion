@@ -332,17 +332,8 @@ Use the following method to display an interstitial in your game:
 </details>
 
 ## Events
-
-
-A. [Progression events](#progression-events)  
-B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
-C. [Segmentation Events](#segmentation-events)  
-D. [Custom Events](#custom-events) 
-
-<details>
-  <summary></summary>
   
---- 
+---
 ### Progression Events
 
 <details>
