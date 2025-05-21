@@ -38,21 +38,22 @@ In this version, we've made the following updates:
    A. [Rewarded Video Ads](#rewarded-video-ads-api)  
    B. [Interstitial Ads](#interstitial-ads-api)  
    C. [Banner Ads](#banner-ads-api)
-7. [Events](#events)  
+   D. [App Open](#app-open-ads-api)
+8. [Events](#events)  
   A. [Progression events](#progression-events)  
   B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
   C. [Segmentation Events](#segmentation-events)  
   D. [Custom Events](#custom-events)  
-8. [Firebase Configuration](#firebase-configuration)
-9. [CMP - GDPR Consent](#cmp---gdpr-consent)
-10. [In-Game Fonts](#in-game-fonts)
-11. [Rate Us View](#rate-us-view)
-12. [DATA Safety](#data-safety)  
+9. [Firebase Configuration](#firebase-configuration)
+10. [CMP - GDPR Consent](#cmp---gdpr-consent)
+11. [In-Game Fonts](#in-game-fonts)
+12. [Rate Us View](#rate-us-view)
+13. [DATA Safety](#data-safety)  
       A. [Android](#android)  
       B. [iOS](#ios)  
       C. [Facebbok Data Checkup](#facebbok-data-checkup)  
-13. [Testing](#testing)
-14. [Common Issues](#common-issues)
+14. [Testing](#testing)
+15. [Common Issues](#common-issues)
 
 </details>
 
@@ -226,6 +227,7 @@ MoonSDK does support the following ad formats:
 A. [Rewarded Video Ads](#rewarded-video-ads-api)  
 B. [Interstitial Ads](#interstitial-ads-api)  
 C. [Banner Ads](#banner-ads-api)
+D. [App Open](#app-open-ads-api)
 
 To use the advertisement manager add the following namespace: 
       using `Moonee.MoonSDK.Internal.Advertisement;`
@@ -327,6 +329,27 @@ Use the following method to display an interstitial in your game:
       
       AdvertisementManager.HideBanner();
       
+</details>
+
+### App Open Ads API:
+<details>
+  <summary>Expand</summary>
+
+Starting from MOON SDK V 1.4.3 (Date 21.05.2025) you can anable app open ads.
+- Ads appear when users bring your app to foreground
+- Users can close ads at any time
+
+#### Setup:
+- Toggle on app open ads for Android and iOS
+- Add unit IDs (provided by monetization manager) Will be automatic in SDK 1.4.4
+
+#### Technical:
+- Flow: CMP → Loading → App open ad
+- SDK calls AppLovin for available ad inventory
+- Check logs for "Initializing app open ad" confirmation
+
+ ![app_open](images/app_open.png)
+
 </details>
 
 </details>
