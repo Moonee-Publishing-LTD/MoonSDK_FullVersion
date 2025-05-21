@@ -13,15 +13,14 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.2.1(Released: 27/02/2025)
+#### Current Version: 1.4.3 (Released: 21/05/2025)
 
 In this version, we've made the following updates:
 
-- Moloco adaptor fix
-- Custom paramter at level start
-- Adjust SDK V5 include:
-  - Signature
-  - Purchase verification
+- New Ad Type: Introduction of a new ad format "App Open" to enhance monetization opportunities.
+- Adapter Updates: All relevant ad network adapters have been updated to ensure compatibility and optimal performance.
+- New Partner – Bigo Ads has been integrated as a new monetization partner, expanding our demand sources and potential revenue streams.
+
   
 # Table of Contents
 <details>
@@ -37,8 +36,8 @@ In this version, we've made the following updates:
 6. [Displaying Ads](#displaying-ads)  
    A. [Rewarded Video Ads](#rewarded-video-ads-api)  
    B. [Interstitial Ads](#interstitial-ads-api)  
-   C. [Banner Ads](#banner-ads-api)
-   D. [App Open](#app-open-ads-api)
+   C. [Banner Ads](#banner-ads-api)  
+   D. [App Open](#app-open-ads)
 8. [Events](#events)  
   A. [Progression events](#progression-events)  
   B. [In-app purchase (IAP) Events](#in-app-purchase-iap-events)  
@@ -226,8 +225,8 @@ MoonSDK does support the following ad formats:
 
 A. [Rewarded Video Ads](#rewarded-video-ads-api)  
 B. [Interstitial Ads](#interstitial-ads-api)  
-C. [Banner Ads](#banner-ads-api)
-D. [App Open](#app-open-ads-api)
+C. [Banner Ads](#banner-ads-api)  
+D. [App Open](#app-open-ads)
 
 To use the advertisement manager add the following namespace: 
       using `Moonee.MoonSDK.Internal.Advertisement;`
@@ -331,7 +330,7 @@ Use the following method to display an interstitial in your game:
       
 </details>
 
-### App Open Ads API:
+### App Open Ads:
 <details>
   <summary>Expand</summary>
 
@@ -342,9 +341,11 @@ Starting from MOON SDK V 1.4.3 (Date 21.05.2025) you can anable app open ads.
 #### Setup:
 - Toggle on app open ads for Android and iOS
 - Add unit IDs (provided by monetization manager) Will be automatic in SDK 1.4.4
+- There is no need to call to the ad, if there is a fill, SDK will present it.
 
 #### Technical:
-- Flow: CMP → Loading → App open ad
+- We are initiating the loading of the App Open ad concurrently with the SDK initialization. Once the ad is ready, it will be shown immediately, even if the user is still on the splash screen.
+- Flow: CMP → SDK Initialization (App Open ad load starts) → Splash Screen → Show App Open ad as soon as it's ready
 - SDK calls AppLovin for available ad inventory
 - Check logs for "Initializing app open ad" confirmation
 
@@ -505,17 +506,16 @@ In order to validate purchases we need app google public key:
 4. Scroll down the page and see the key under "Licensing"
    
 1. Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.
+2. In iOS case, just **obfuscate** again.
+3. Make sure to obfuscate every time you are importing a new version of SDK.
 ![obfuscation](images/obfuscation.png)
-2. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
-3. If you don't have an in app in the game, send `string.Empty`
-4. For IAP validation: Use the IAP catalog from Unity, and set correct ID (like on a store) also fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
+4. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
+5. If you don't have an in app in the game, send `string.Empty`
+6. For IAP validation: Use the IAP catalog from Unity, and set correct ID (like on a store) also fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
 ![overrides](images/overrides.png)
-5. After each successful purchase you need to send event to adjust:  
+7. After each successful purchase you need to send event to adjust:  
 
-      ```MoonSDK.TrackAdjustRevenueEventAsync(args, subsription, "4");```
-
-
- 
+      ```MoonSDK.TrackAdjustRevenueEvent(args, subsription, "4");```
 
 </details>
 
