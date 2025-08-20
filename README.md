@@ -13,13 +13,13 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.3 (Released: 21/05/2025)
+#### Current Version: 1.4.4 (Released: 20/08/2025)
 
 In this version, we've made the following updates:
 
-- New Ad Type: Introduction of a new ad format "App Open" to enhance monetization opportunities.
-- Adapter Updates: All relevant ad network adapters have been updated to ensure compatibility and optimal performance.
-- New Partner – Bigo Ads has been integrated as a new monetization partner, expanding our demand sources and potential revenue streams.
+- Updated Unity (6000.2.0f1), Google Billing Library (7), Firebase, Facebook, and Applovin SDK versions
+- Enhanced Adaptors and Mediator (MAX)
+- Improved Banner Refreshments
 
   
 # Table of Contents
@@ -199,14 +199,17 @@ This section is here for cases where you are not using the events methods.
 
      ![MoonSDKScene](images/MoonSDKScene.png)
      
-  5. Open MoonSDK settings and fill in all app keys for analytics and advertising services, Please ensure you add **all** of them and **copy/paste** them to the correct location in the inspector.
-  6. Press Check and Sync Settings button
-     
-     **Note:Make sure to copy/paste the tokens/ad IDs and not type them manually to avoid mistakes.**
-     
-    
-     ![SyncSettings](images/SyncSettingsNew.png)
+  5. Open the **Moonee Dashboard**, go to the **Admin tab → Games**, and find your game in the list.
+  6. Click **Download Configuration File**.
+  7. In your Unity project, navigate to: **Assets → Resources → MoonSDK** and place the configuration file there.
+  8. In the Unity Editor menu, click **Moonee → Moon SDK → Import Settings**.
+  9. A pop-up will confirm that the configuration file has been successfully initialized.
+  10. To verify, go to **Moonee → Moon SDK → Edit Settings**. On the right side, you should see that all required keys have been filled in.
 
+  Whatch this video for visualisation: 
+<video width="800" controls>
+  <source src="https://github.com/Moonee-Publishing-LTD/MoonSDK_FullVersion/raw/main/images/ConfigFileTutorial.mp4" type="video/mp4">
+</video>
      
 </details>
  
