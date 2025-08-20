@@ -207,10 +207,11 @@ This section is here for cases where you are not using the events methods.
   10. To verify, go to **Moonee → Moon SDK → Edit Settings**. On the right side, you should see that all required keys have been filled in.
 
   Whatch this video for visualisation: 
-<video width="800" controls>
-  <source src="https://github.com/Moonee-Publishing-LTD/MoonSDK_FullVersion/raw/main/images/ConfigFileTutorial.mp4" type="video/mp4">
-</video>
-     
+
+
+https://github.com/user-attachments/assets/0c316651-149a-4597-b795-2528c5b2a4bc
+
+
 </details>
  
 ## Initialization
