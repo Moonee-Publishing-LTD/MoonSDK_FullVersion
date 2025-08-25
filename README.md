@@ -457,7 +457,7 @@ MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, levelNumber, LevelResul
 ---
 
 #### **In-Game Store**  
-##### #### Advanced - not for initial test
+#### Advanced - not for initial test
 For tracking player interactions with the in-game store, use the following functions:
 
 ```csharp
@@ -496,8 +496,9 @@ In order to validate purchases we need app google public key:
 4. Scroll down the page and see the key under "Licensing"
 5. Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.
 
-#### Play Store
-1. Go to receipt Validation Obfuscator just **obfuscate**.
+#### App Store
+1. Go to receipt Validation Obfuscator
+2. Press **“Obfuscate Apple License Key”**.
 
 #### Notes:
 1. Make sure to obfuscate every time you are importing a new version of SDK.
