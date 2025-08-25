@@ -486,7 +486,16 @@ In-app purchase (IAP) Event contains the following parameters:
 2. `iAPType` - Refer to the different types of in-app purchases:  
     A. `product` - consumable/non-consumable product single purchase.  
     B. `Subscription` - A product that allows users to purchase content for a defined period.     
-3. `levelNunmber` -  Specifies the level where the in-app purchase was made. 
+3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
+
+#### For IAP validation: 
+1. Use the IAP catalog from Unity
+2. Set **correct ID** (like on a store)
+   Fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
+![overrides](images/overrides.png)
+3. After each successful purchase you need to send event to adjust:  
+
+      ```MoonSDK.TrackAdjustRevenueEvent(args, subsription, "4");```
 
 #### Google Play
 In order to validate purchases we need app google public key:
@@ -505,11 +514,7 @@ In order to validate purchases we need app google public key:
 ![obfuscation](images/obfuscation.png)
 2. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
 3. If you don't have an in app in the game, send `string.Empty`
-4. For IAP validation: Use the IAP catalog from Unity, and set correct ID (like on a store) also fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
-![overrides](images/overrides.png)
-5. After each successful purchase you need to send event to adjust:  
 
-      ```MoonSDK.TrackAdjustRevenueEvent(args, subsription, "4");```
 
 </details>
 
