@@ -164,15 +164,8 @@ The SDK is sending the events automatically to GA from progression events part. 
 This section is here for cases where you are not using the events methods.
 
 1. Create a Game analytics account and asset using this [link](https://tool.gameanalytics.com/login?redirect=%252F).
-2. If your game is level-based, make sure to have the events:
-   - Start
-   - Complete
-   - Fail
-3. Make sure to have the level events naming in the format:
-   - “Level0001”
-   - “Level0002”  
-   (Make sure to start from level 0001 and not from 0000)
-4. Grant us Admin access to the app on Game Analytics: 
+2. If your game is level-based, we are sending it automaticaly via the "leevl start" and "level complete" 
+3. Grant us Admin access to the app on Game Analytics: 
    - Settings -> Users -> Invite users -> for this user erez@moonee.io
   </details>
 
@@ -191,7 +184,7 @@ This section is here for cases where you are not using the events methods.
 
   1. Import MoonSDK.unitypackage into your unity project.<br>
    **Note: For initial test you only need to import these monetization adapters under "Mediated Networks":
-     Mintegral, Facebook, ironSource, Unity Ads, BidMachine, AdMob, inMobi, Verve, Liftoff, Pangle, Smaato, DT Exchange, Moloco**
+     Mintegral, Facebook, ironSource, Unity Ads, BidMachine, AdMob, inMobi, Verve, Liftoff, Pangle, Smaato, DT Exchange**
      
   3. Please note, that our SDK uses some iAP features, so iAP package should be installed from the package manager
   
@@ -479,11 +472,6 @@ Remember to add every Rewarded Video used in the game. Append `"rewardedVideoNam
 
 ---
 
-**Important Notes:**
-- **A.** Ensure that a token is sent to Adjust for *each event*.
-- **B.** Double-check that there are no spaces before or after the token.
-- **C.** Always **copy/paste** the tokens to avoid errors.
-
 </details>
 
 --- 
@@ -500,24 +488,25 @@ In-app purchase (IAP) Event contains the following parameters:
     B. `Subscription` - A product that allows users to purchase content for a defined period.     
 3. `levelNunmber` -  Specifies the level where the in-app purchase was made. 
 
-
-To accurately monitor in-app purchase (IAP) revenue through Adjust, ensure you've configured the Adjust app token and the IAP revenue event token within the Moon SDK settings.  
-
+#### Google Play
 In order to validate purchases we need app google public key:
 1. Log into the google play console: <a href="[url](https://play.google.com/console/u/0/developers )">Google Play Console</a>
 2. Select your app from the list of apps
 3. In the left panel click on "Monetize with play" -> "Monetization setup"
 4. Scroll down the page and see the key under "Licensing"
-   
-1. Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.
-2. In iOS case, just **obfuscate** again.
-3. Make sure to obfuscate every time you are importing a new version of SDK.
+5. Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.
+
+#### Play Store
+1. Go to receipt Validation Obfuscator just **obfuscate**.
+
+#### Notes:
+1. Make sure to obfuscate every time you are importing a new version of SDK.
 ![obfuscation](images/obfuscation.png)
-4. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
-5. If you don't have an in app in the game, send `string.Empty`
-6. For IAP validation: Use the IAP catalog from Unity, and set correct ID (like on a store) also fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
+2. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
+3. If you don't have an in app in the game, send `string.Empty`
+4. For IAP validation: Use the IAP catalog from Unity, and set correct ID (like on a store) also fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
 ![overrides](images/overrides.png)
-7. After each successful purchase you need to send event to adjust:  
+5. After each successful purchase you need to send event to adjust:  
 
       ```MoonSDK.TrackAdjustRevenueEvent(args, subsription, "4");```
 
