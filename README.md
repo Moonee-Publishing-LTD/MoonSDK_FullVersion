@@ -4,7 +4,7 @@
 # Monetization Guide
 Welcome, developers, to the full version of the Moon SDK! 🌕
 
-Exciting news awaits as we transition to the Moonee SDK. If you were using the Moonlight SDK previously, kindly remove it and make the switch to this upgraded version.
+Exciting news awaits as we transition to the Moon SDK. If you were using the Moonlight SDK previously, kindly remove it and make the switch to this upgraded version.
 
 In this journey, we're implementing MAX as the central mediator for all monetization partners, streamlining the process while also empowering you to leverage your own monetization products.
 
@@ -13,14 +13,15 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.4 (Released: 20/08/2025)
+#### Current Version: 1.4.5 (Released: 27/10/2025)
 
 In this version, we've made the following updates:
 
-- Updated Unity (6000.2.0f1), Google Billing Library (7), Firebase, Facebook, and Applovin SDK versions
-- Enhanced Adaptors and Mediator (MAX)
-- Improved Banner Refreshments
-
+- Dual Interstitial Optimization
+- Pre-Build MAX Adapter Check & Auto-Update
+- Server-Side IAP Receipt Validation
+- Runtime App Open Ad Control
+- Dependency Version Tracker Event
   
 # Table of Contents
 <details>
@@ -61,9 +62,10 @@ In this version, we've made the following updates:
 <details>
   <summary></summary>
   
-  - Unity Editor 2022 LTS version
+  - Unity Editor 6000.2.10f1 and later
   - Android:
     - Minimum SDK: Nougat 7.1 (API 25)
+    - Maximum SDK: Android 15.0 (API 35)
     - Scripting backend: IL2CPP
   - iOS:
     - Target minimum iOS Version: 13.0
@@ -164,7 +166,7 @@ The SDK is sending the events automatically to GA from progression events part. 
 This section is here for cases where you are not using the events methods.
 
 1. Create a Game analytics account and asset using this [link](https://tool.gameanalytics.com/login?redirect=%252F).
-2. If your game is level-based, we are sending it automaticaly via the "leevl start" and "level complete" 
+2. If your game is level-based, we are sending it automaticaly via the "level start" and "level complete" 
 3. Grant us Admin access to the app on Game Analytics: 
    - Settings -> Users -> Invite users -> for this user erez@moonee.io
   </details>
@@ -211,7 +213,7 @@ https://github.com/user-attachments/assets/0c316651-149a-4597-b795-2528c5b2a4bc
 <details>
   <summary></summary>
 Moon SDK is initialized automatically from the Moon SDK scene.
-When downloding the Unity packge, you are getting in Apploving intergration manager the list of adaptors needed to bedownlieded. If we need any type of change (e.g not use one of them) your PM will tell you about it.
+During the installation of the MoonSDK Unity package, the AppLovin Integration Manager already includes all the necessary adapters. If any changes are required (for example, excluding a specific adapter), your project manager will inform you.
 </details>
 
 ## Displaying Ads
@@ -340,11 +342,36 @@ Starting from MOON SDK V 1.4.3 (Date 21.05.2025) you can anable app open ads.
 - Add unit IDs (provided by monetization manager) Will be automatic in SDK 1.4.4
 - There is no need to call to the ad, if there is a fill, SDK will present it.
 
+#### Runtime App Open Ad Control
+From Vesrion 1.4.5 Runtime App Open Ad Control is provided (This feature allows dynamic control over the display of App Open Ads at runtime. Based on predefined date rules or conditions, the system determines whether the ad should be shown when the game starts. Developers can enable or disable this feature without rebuilding the app, ensuring flexible management of App Open Ads for special campaigns, testing, or temporary deactivation.)
+
+API Example
+
+Enable or disable App Open Ad on startup
+
+AppOpenAdController.SetAppOpenAdOnStart(true);   // Enable
+AppOpenAdController.SetAppOpenAdOnStart(false);  // Disable
+
+Check if App Open Ad is currently enabled
+
+if (AppOpenAdController.IsAppOpenAdEnabled())
+{
+    Debug.Log("App Open Ad is enabled — showing ad on launch.");
+}
+else
+{
+    Debug.Log("App Open Ad is disabled — skipping ad on launch.");
+}
+
 #### Technical:
 - We are initiating the loading of the App Open ad concurrently with the SDK initialization. Once the ad is ready, it will be shown immediately, even if the user is still on the splash screen.
 - Flow: CMP → SDK Initialization (App Open ad load starts) → Splash Screen → Show App Open ad as soon as it's ready
 - SDK calls AppLovin for available ad inventory
 - Check logs for "Initializing app open ad" confirmation
+
+#### Dual Interstitial Optimization (available since v1.4.5)
+
+This feature can be enabled in MoonSDK Settings. When active, the system compares the combined revenue of two interstitial ads with the expected revenue of a single rewarded video. If showing two interstitials results in higher yield, the SDK automatically displays them instead of one rewarded ad — maximizing overall ad revenue while maintaining a smooth user experience.
 
  ![app_open](images/app_open.png)
 
@@ -482,40 +509,11 @@ Remember to add every Rewarded Video used in the game. Append `"rewardedVideoNam
   <summary></summary>
 
 In-app purchase (IAP) Event contains the following parameters:  
-1. `purchaseEventArgs`   
+1. `order` - An object containing purchase details from Google Play or App Store. It’s used to send transaction data for validation, analytics, and server-side receipt verification.  
 2. `iAPType` - Refer to the different types of in-app purchases:  
     A. `product` - consumable/non-consumable product single purchase.  
     B. `Subscription` - A product that allows users to purchase content for a defined period.     
 3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
-
-#### For IAP validation: 
-1. Use the IAP catalog from Unity
-2. Set **correct ID** (like on a store)
-   Fill in store ID overrides for each product and google or iOS price in USD, with `.` and not `,` from decimal in every case.
-![overrides](images/overrides.png)
-3. After each successful purchase you need to send event to adjust:  
-
-      ```MoonSDK.TrackAdjustRevenueEvent(args, subsription, "4");```
-
-#### Google Play
-In order to validate purchases we need app google public key:
-1. Log into the google play console: <a href="[url](https://play.google.com/console/u/0/developers )">Google Play Console</a>
-2. Select your app from the list of apps
-3. In the left panel click on "Monetize with play" -> "Monetization setup"
-4. Scroll down the page and see the key under "Licensing"
-5. Go to receipt Validation Obfuscator , **paste** the google public key of your app and press **“Obfuscate Google Play License Key”**.
-
-#### App Store
-1. Go to receipt Validation Obfuscator
-2. Press **“Obfuscate Apple License Key”**.
-
-#### Notes:
-1. Make sure to obfuscate every time you are importing a new version of SDK.
-![obfuscation](images/obfuscation.png)
-2. Please ensure that the event is triggered from every available location where the product can be purchased. If users have the option to buy from both the in-game store and a popup, make sure the event is sent in both scenarios.  
-3. If you don't have an in app in the game, send `string.Empty`
-
-
 </details>
 
 --- 
