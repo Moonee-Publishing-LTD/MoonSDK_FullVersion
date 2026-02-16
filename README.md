@@ -13,16 +13,19 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.5 (Released: 27/10/2025)
+#### Current Version: 1.4.6 (Released: 9/02/2026)
 
 In this version, we've made the following updates:
 
-- Dual Interstitial Optimization
+- Dynamic memory-aware usage
+- CTR tracking
+- Google Ad Mob SDK integration
+- Leaps users are blocked from Google ads
+- Dual Interstitial Optimization for Applovin
 - Pre-Build MAX Adapter Check & Auto-Update
-- Server-Side IAP Receipt Validation
 - Runtime App Open Ad Control
 - Dependency Version Tracker Event
-  
+
 # Table of Contents
 <details>
   <summary></summary>
@@ -70,6 +73,7 @@ In this version, we've made the following updates:
   - iOS:
     - Target minimum iOS Version: 13.0
     - Scripting backend: IL2CPP
+    - XCode 16.2
   - Stores:
     - In order for us to have the optimal monetization, we will need you to add our web link in the stores:[https://moonee.io](#https://moonee.io)
     - On Google play it’s under Store Settings -> Website
