@@ -25,6 +25,7 @@ In this version, we've made the following updates:
 - Pre-Build MAX Adapter Check & Auto-Update
 - Runtime App Open Ad Control
 - Dependency Version Tracker Event
+- Server side iAP validation
 
 # Table of Contents
 <details>
