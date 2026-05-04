@@ -13,7 +13,7 @@ Let's embark on this enhanced development experience together! 🚀
 
 
 #
-#### Current Version: 1.4.6 (Released: 9/02/2026)
+#### Current Version: 1.4.6.1 (Released: 14/04/2026)
 
 In this version, we've made the following updates:
 
@@ -22,10 +22,10 @@ In this version, we've made the following updates:
 - Google Ad Mob SDK integration
 - Leaps users are blocked from Google ads
 - Dual Interstitial Optimization for Applovin
-- Pre-Build MAX Adapter Check & Auto-Update
+- Pre-Build MAX Adapter Check
 - Runtime App Open Ad Control
 - Dependency Version Tracker Event
-- Server side iAP validation
+- Server side iAP validation (For iOS validation testing in TestFlight, please enable the isIAPTest flag in the Moon SDK settings. Make sure to disable it before the release build.)
 
 # Table of Contents
 <details>
