@@ -519,6 +519,9 @@ In-app purchase (IAP) Event contains the following parameters:
     A. `product` - consumable/non-consumable product single purchase.  
     B. `Subscription` - A product that allows users to purchase content for a defined period.     
 3. `levelNunmber` -  Specifies the level where the in-app purchase was made.
+
+For iOS validation testing in TestFlight, please enable the isIAPTest flag in the Moon SDK settings. Make sure to disable it before the release build.
+
 </details>
 
 --- 
